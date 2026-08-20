@@ -22,24 +22,25 @@
   gtag('js', new Date());
   gtag('config', 'G-P41HN02DDV');
 </script>
-<title>TDEE Calculator &amp; Free Macro Split &mdash; Maintenance, Cut &amp; Bulk Calories</title>
-<meta name="description" content="Free TDEE and macro calculator using Mifflin-St Jeor or, with your body fat %, the more accurate Katch-McArdle formula. Get maintenance, cut, and bulk calorie targets, BMI, ideal body weight, and a personalized macro breakdown.">
-<meta property="og:title" content="Free TDEE & Macro Calculator | Healthy Life Scale">
-<meta property="og:description" content="Find your daily calorie needs with Mifflin-St Jeor or Katch-McArdle, plus BMI and ideal weight, then track against it.">
+<title>Blood Alcohol Content (BAC) Calculator &mdash; Free Educational Estimate</title>
+<meta name="description" content="Free educational blood alcohol content (BAC) calculator using the Widmark formula. Estimate your approximate BAC based on drinks, weight, and time — for education only, never for deciding whether it's safe to drive.">
+<meta property="og:title" content="Free BAC Calculator (Educational) | Healthy Life Scale">
+<meta property="og:description" content="Estimate your approximate blood alcohol content for educational purposes only.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://bmr.healthylifescale.com/">
+<meta property="og:url" content="https://bac.healthylifescale.com/">
 <meta property="og:image" content="https://healthylifescale.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Healthy Life Scale">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free TDEE & Macro Calculator | Healthy Life Scale">
-<meta name="twitter:description" content="Find your daily calorie needs with Mifflin-St Jeor or Katch-McArdle, plus BMI and ideal weight, then track against it.">
+<meta name="twitter:title" content="Free BAC Calculator (Educational) | Healthy Life Scale">
+<meta name="twitter:description" content="Estimate your approximate blood alcohol content for educational purposes only.">
 <meta name="twitter:image" content="https://healthylifescale.com/og-image.png">
-<link rel="canonical" href="https://bmr.healthylifescale.com/">
+<link rel="canonical" href="https://bac.healthylifescale.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
   :root{
     --paper:#FAF7F0; --paper-raised:#FFFFFF; --ink:#191918; --ink-soft:#585448;
     --muted:#8A8577; --protein:#B23A2F; --carb:#C08A17; --fat:#5C6B2E; --fiber:#3A6B6B;
@@ -222,6 +223,28 @@
   .faq-q.open .faq-icon{ transform:rotate(45deg); }
   .faq-a{ display:none; padding:0 0 14px; font-size:13px; line-height:1.65; color:var(--ink-soft); }
   .faq-a.open{ display:block; }
+
+  #resultCard, #bmrLine, #resultBanner, #ccResults, #resultLabel{ scroll-margin-top: 80px; }
+  .result-card{ background:var(--paper-raised); border:3px solid var(--ink); padding:22px; display:none; margin-bottom:20px; text-align:center; }
+  .result-card.show{ display:block; }
+  .safety-banner{ background:#F5E3E1; border:2px solid var(--protein); padding:16px; margin-bottom:20px; text-align:left; }
+  .safety-banner b{ display:block; font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.03em; color:var(--protein); margin-bottom:6px; }
+  .safety-banner p{ font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin:0; }
+  .bac-value{ font-family:'Space Mono',monospace; font-weight:700; font-size:44px; color:var(--protein); line-height:1; }
+  .bac-sub{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; margin-top:6px; }
+  .bac-result-note{ background:#F5E3E1; border:2px solid var(--protein); padding:14px; margin:18px 0; text-align:left; }
+  .bac-result-note b{ color:var(--protein); }
+  .bac-result-note p{ font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin:6px 0 0; }
+  .bac-table{ width:100%; border-collapse:collapse; font-size:12.5px; margin-top:6px; text-align:left; }
+  .bac-table th{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); text-align:left; padding:6px 4px; border-bottom:1.5px solid var(--ink); }
+  .bac-table td{ padding:8px 4px; border-bottom:1px solid var(--hair); }
+  .bac-table tr:last-child td{ border-bottom:none; }
+  .bac-table tr.hl{ background:var(--paper); font-weight:700; }
+  .poison-box{ background:#FBF2E1; border-left:3px solid var(--carb); padding:12px 14px; margin-top:16px; text-align:left; font-size:12px; color:var(--ink-soft); line-height:1.6; }
+  .poison-box b{ color:var(--ink); }
+  .cc-crosslink{ background:#EAECF5; border-left:3px solid #5C6B9E; padding:12px 14px; margin-top:14px; font-size:12.5px; line-height:1.6; color:var(--ink-soft); text-align:left; }
+  .cc-crosslink a{ color:#5C6B9E; font-weight:700; }
+
 </style>
 <script type="application/ld+json">
 {
@@ -230,74 +253,34 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What's the difference between BMR and TDEE?",
+      "name": "Can this calculator tell me if I'm safe to drive?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "BMR (Basal Metabolic Rate) is the calories your body burns at complete rest. TDEE (Total Daily Energy Expenditure) adds your activity level on top of that \u2014 TDEE is your actual maintenance calorie number."
+        "text": "No. This is an educational estimate only, not a precise measurement. Actual BAC is affected by many factors this formula can't account for (food intake, medications, individual metabolism, drink strength variation), and it can be significantly wrong in either direction. The only safe choice after drinking is not to drive \u2014 use a rideshare, taxi, or designated driver instead."
       }
     },
     {
       "@type": "Question",
-      "name": "How many calories should I eat to lose weight?",
+      "name": "What formula does this use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A common approach is eating around 500 calories below your TDEE per day, which typically leads to about 0.5kg (1lb) of weight loss per week \u2014 shown as the \"Weight Loss\" target above."
+        "text": "The Widmark formula, a standard method from forensic toxicology that estimates BAC from alcohol consumed, body weight, biological sex, and time elapsed. It's a population-average estimate, not a personalized measurement."
       }
     },
     {
       "@type": "Question",
-      "name": "What macro split is best for cutting or weight loss?",
+      "name": "What counts as one standard drink?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A higher-protein split (like the \"High Protein\" option here) is often recommended during a calorie deficit, since it helps preserve muscle mass while losing fat."
+        "text": "In the US, one standard drink is about 14 grams of pure alcohol \u2014 roughly a 12 oz beer at 5% ABV, a 5 oz glass of wine at 12% ABV, or a 1.5 oz shot of spirits at 40% ABV. Many drinks (especially cocktails and craft beers) contain more than one standard drink."
       }
     },
     {
       "@type": "Question",
-      "name": "How accurate is this TDEE calculator?",
+      "name": "Why do the results vary so much between calculators?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "If you don't enter body fat %, it uses Mifflin-St Jeor, one of the most widely validated formulas for estimating calorie needs. If you do enter body fat %, it switches to Katch-McArdle, which is generally more accurate since it's based on your actual lean body mass rather than a population average."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What's the Katch-McArdle formula, and why does body fat % matter?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Katch-McArdle calculates BMR from your lean body mass instead of age and gender averages, so it accounts for differences in muscle mass between two people of the same height, weight, age, and gender."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is ideal body weight and how is it calculated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It's an estimated healthy weight range based on your height, calculated using four classic medical formulas (Hamwi, Devine, Robinson, and Miller). They're population averages, not individual targets."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I send my calculated calories straight to a food tracker?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes \u2014 the \"Use as my calorie & protein goal\" button sends your chosen target directly to the Calorie Tracker's daily goal."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does this calculator remember my details for next time?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes \u2014 your age, height, weight, gender, and activity level are saved privately in your browser, so they're pre-filled the next time you visit. Nothing is sent to a server."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I recalculate my TDEE as my weight changes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes \u2014 TDEE shifts as your weight changes, since it's partly based on body weight. It's worth recalculating every few weeks, especially during active weight loss or gain, to keep your targets accurate."
+        "text": "Because the Widmark formula relies on population-average constants that don't capture individual variation \u2014 body composition, stomach contents, medications, liver function, and drink strength all affect real BAC. This is exactly why the estimate should never be used to judge whether you're safe or legal to drive."
       }
     }
   ]
@@ -316,7 +299,7 @@
         </svg>
         Healthy Life Scale
       </a>
-      <span class="current-page">BMR / TDEE</span>
+      <span class="current-page">BAC Calculator</span>
       <div class="tools-dropdown">
         <button class="tools-btn" id="toolsBtn" aria-haspopup="true" aria-expanded="false">
           Other Tools
@@ -332,13 +315,41 @@
           <div class="tm-name">BMI Calculator</div>
           <div class="tm-desc">Check your Body Mass Index and healthy weight range.</div>
         </a>
+        <a href="https://bodyfat.healthylifescale.com">
+          <div class="tm-name">Body Fat % Calculator</div>
+          <div class="tm-desc">Estimate body fat using the Navy tape-measure method.</div>
+        </a>
+        <a href="https://waisttohip.healthylifescale.com">
+          <div class="tm-name">Waist-to-Hip Ratio</div>
+          <div class="tm-desc">Check your ratio against WHO risk categories.</div>
+        </a>
+        <a href="https://framesize.healthylifescale.com">
+          <div class="tm-name">Body Frame Size Calculator</div>
+          <div class="tm-desc">Find your small, medium, or large frame size.</div>
+        </a>
         <a href="https://water.healthylifescale.com">
           <div class="tm-name">Water Intake</div>
           <div class="tm-desc">Get a daily hydration goal and log glasses as you drink.</div>
         </a>
+        <a href="https://bmr.healthylifescale.com">
+          <div class="tm-name">BMR / TDEE</div>
+          <div class="tm-desc">Find your daily calorie needs and a personalized macro split.</div>
+        </a>
+        <a href="https://protein.healthylifescale.com">
+          <div class="tm-name">Protein Intake Calculator</div>
+          <div class="tm-desc">Find your daily protein target based on body weight and goal.</div>
+        </a>
+        <a href="https://caloriesburned.healthylifescale.com">
+          <div class="tm-name">Calories Burned Calculator</div>
+          <div class="tm-desc">See how many calories you burned during any activity.</div>
+        </a>
         <a href="https://sleep.healthylifescale.com">
           <div class="tm-name">Sleep Calculator</div>
           <div class="tm-desc">Find your ideal bedtime or wake-up time by sleep cycle.</div>
+        </a>
+        <a href="https://nap.healthylifescale.com">
+          <div class="tm-name">Nap Calculator</div>
+          <div class="tm-desc">Find your ideal nap length and wake-up time.</div>
         </a>
         <a href="https://duedate.healthylifescale.com">
           <div class="tm-name">Pregnancy Due Date</div>
@@ -364,373 +375,214 @@
           <div class="tm-name">Heart Age Calculator</div>
           <div class="tm-desc">See how lifestyle factors compare your heart age to your real age.</div>
         </a>
-        <a href="https://breathholding.healthylifescale.com">
-          <div class="tm-name">Breath Holding Test</div>
-          <div class="tm-desc">Time how long you can hold your breath and see how it compares.</div>
-        </a>
         <a href="https://ascvd.healthylifescale.com">
           <div class="tm-name">ASCVD Risk Calculator</div>
           <div class="tm-desc">Estimate your 10-year heart disease and stroke risk tier.</div>
         </a>
+        <a href="https://heartratezone.healthylifescale.com">
+          <div class="tm-name">Target Heart Rate Zone</div>
+          <div class="tm-desc">Find your personalized training zones using the Karvonen formula.</div>
+        </a>
+        <a href="https://breathholding.healthylifescale.com">
+          <div class="tm-name">Breath Holding Test</div>
+          <div class="tm-desc">Time how long you can hold your breath and see how it compares.</div>
+        </a>
+        <a href="https://pace.healthylifescale.com">
+          <div class="tm-name">Running Pace Calculator</div>
+          <div class="tm-desc">Calculate your pace, speed, and predicted race times.</div>
+        </a>
         <a href="https://symptoms.healthylifescale.com">
           <div class="tm-name">Symptom Checker</div>
-          <div class="tm-desc">Select your symptoms and find out how urgently to seek care.</div>
+          <div class="tm-desc">Get an urgency level based on your symptoms, age, and history.</div>
         </a>
         <a href="https://mentalhealth.healthylifescale.com">
           <div class="tm-name">Mental Health Survey</div>
           <div class="tm-desc">A private PHQ-9 / GAD-7 depression & anxiety screening.</div>
         </a>
-<a href="https://fertility.healthylifescale.com"><div class="tm-name">Fertility Checklist</div><div class="tm-desc">Check lifestyle factors linked to sperm health and track over time.</div></a>
-<a href="https://gripstrength.healthylifescale.com"><div class="tm-name">Grip Strength Calculator</div><div class="tm-desc">Benchmark your handgrip strength by age and sex.</div></a>
+        <a href="https://fertility.healthylifescale.com">
+          <div class="tm-name">Fertility Checklist</div>
+          <div class="tm-desc">Check lifestyle factors linked to sperm health and track over time.</div>
+        </a>
+        <a href="https://gripstrength.healthylifescale.com">
+          <div class="tm-name">Grip Strength Calculator</div>
+          <div class="tm-desc">Benchmark your handgrip strength by age and sex.</div>
+        </a>
+        <a href="https://onerepmax.healthylifescale.com">
+          <div class="tm-name">One-Rep Max Calculator</div>
+          <div class="tm-desc">Estimate your 1RM using the Epley and Brzycki formulas.</div>
+        </a>
         </div>
       </div>
     </div>
   </header>
 
-<script>
-(function(){
-  var btn = document.getElementById('toolsBtn');
-  var menu = document.getElementById('toolsMenu');
-  if(!btn || !menu) return;
-  btn.addEventListener('click', function(e){
-    e.stopPropagation();
-    var isOpen = menu.classList.toggle('open');
-    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  document.addEventListener('click', function(e){
-    if(!menu.classList.contains('open')) return;
-    if(!menu.contains(e.target) && !btn.contains(e.target)){
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && menu.classList.contains('open')){
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.focus();
-    }
-  });
-})();
-</script>
-
+  <script>
+  (function(){
+    var btn = document.getElementById('toolsBtn');
+    var menu = document.getElementById('toolsMenu');
+    if(!btn || !menu) return;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if(!menu.classList.contains('open')) return;
+      if(!menu.contains(e.target) && !btn.contains(e.target)){
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && menu.classList.contains('open')){
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.focus();
+      }
+    });
+  })();
+  </script>
 
   <div class="brand">
-    <h1>TDEE &amp; Macro Calculator</h1>
-    <div class="sub">daily calorie needs &middot; maintenance, loss &amp; gain targets &middot; macro breakdown</div>
+    <h1>Blood Alcohol Content (BAC) Calculator</h1>
+    <div class="sub">Educational estimate using the Widmark formula</div>
+  </div>
+
+  <div class="safety-banner">
+    <b>&#9888; For education only — not a safety or driving decision tool</b>
+    <p>This calculator gives a rough estimate, not a measurement. It cannot tell you whether you're safe or legal to drive. The only way to know your actual BAC is a breathalyzer or blood test. If you've been drinking, don't drive — use a rideshare, taxi, or designated driver, no matter what number this shows.</p>
   </div>
 
   <div class="card">
+    <div class="gradient-bar"></div>
     <h3>Your details</h3>
     <div class="unit-toggle">
-      <button id="unitMetric" class="active">Metric (kg/cm)</button>
-      <button id="unitImperial">Imperial (lb/in)</button>
+      <button id="unitKg" class="active">Kilograms</button>
+      <button id="unitLb">Pounds</button>
     </div>
     <div class="gender-toggle">
       <button id="genderMale" class="active">Male</button>
       <button id="genderFemale">Female</button>
     </div>
     <div class="field-row">
-      <div class="field"><label for="age">Age</label><input type="number" id="age" placeholder="e.g. 28"></div>
-      <div class="field">
-        <label for="activity">Activity level</label>
-        <select id="activity">
-          <option value="1.2">Sedentary (desk job, no exercise)</option>
-          <option value="1.375">Light (exercise 1&ndash;3 days/wk)</option>
-          <option value="1.55" selected>Moderate (exercise 3&ndash;5 days/wk)</option>
-          <option value="1.725">Active (exercise 6&ndash;7 days/wk)</option>
-          <option value="1.9">Very active (physical job / athlete)</option>
-        </select>
-      </div>
+      <div class="field"><label for="weightVal" id="weightLabel">Weight (kg)</label><input type="number" id="weightVal" placeholder="e.g. 75"></div>
     </div>
-
-    <div id="metricFields">
-      <div class="field-row">
-        <div class="field"><label for="heightCm">Height (cm)</label><input type="number" id="heightCm" placeholder="e.g. 170"></div>
-        <div class="field"><label for="weightKg">Weight (kg)</label><input type="number" id="weightKg" placeholder="e.g. 65"></div>
-      </div>
-    </div>
-    <div id="imperialFields" style="display:none;">
-      <div class="field-row">
-        <div class="field"><label for="heightFt">Height (ft)</label><input type="number" id="heightFt" placeholder="e.g. 5"></div>
-        <div class="field"><label for="heightIn">Height (in)</label><input type="number" id="heightIn" placeholder="e.g. 7"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label for="weightLb">Weight (lb)</label><input type="number" id="weightLb" placeholder="e.g. 143"></div>
-        <div></div>
-      </div>
-    </div>
-
     <div class="field-row">
-      <div class="field"><label for="bodyfat">Body fat % (optional)</label><input type="number" id="bodyfat" placeholder="e.g. 20" min="3" max="60" step="0.1"></div>
-      <div></div>
+      <div class="field"><label for="drinksVal">Standard drinks</label><input type="number" id="drinksVal" placeholder="e.g. 3" min="0" step="0.5"></div>
     </div>
-    <div class="field-optional-note">If you know your body fat %, we'll use the Katch-McArdle formula instead of Mifflin-St Jeor &mdash; it's more accurate because it's based on your lean body mass rather than a population average.</div>
+    <div class="field-row">
+      <div class="field"><label for="hoursVal">Hours since first drink</label><input type="number" id="hoursVal" placeholder="e.g. 2" min="0" step="0.25"></div>
+    </div>
+    <p class="field-optional-note">One standard drink &asymp; 12 oz beer (5% ABV), 5 oz wine (12% ABV), or 1.5 oz spirits (40% ABV). Many cocktails and craft beers contain more than one standard drink.</p>
 
-    <button class="calc-btn" id="calcBtn">Calculate</button>
+    <button class="calc-btn" id="calcBtn">Calculate Estimated BAC</button>
   </div>
 
-  <div class="bmr-line" id="bmrLine"></div>
-  <div class="formula-badge" id="formulaBadge"></div>
+  <div class="result-card" id="resultCard">
+    <div class="bac-value" id="bacValue">0.000%</div>
+    <div class="bac-sub">estimated blood alcohol content</div>
 
-  <div class="quickstats" id="quickstats">
-    <div class="quickstat-card">
-      <div class="qs-label">BMI</div>
-      <div class="qs-value" id="bmiValue">&mdash;</div>
-      <div class="qs-sub" id="bmiCategory">&mdash;</div>
-    </div>
-    <div class="quickstat-card">
-      <div class="qs-label">Ideal weight range</div>
-      <div class="qs-value" id="idealWeightQuick">&mdash;</div>
-      <div class="qs-sub">avg. of 4 formulas</div>
-    </div>
-  </div>
+    <h3 style="text-align:left;">General reference ranges</h3>
+    <table class="bac-table" id="bacTable"></table>
 
-  <div class="targets-grid" id="targetsGrid">
-    <div class="target-card maintain">
-      <div class="tc-label">Maintenance</div>
-      <div class="tc-cal" id="maintainCal">0</div>
-      <div class="tc-sub">no change</div>
-      <button class="tc-select" data-target="maintain">Select</button>
-    </div>
-    <div class="target-card loss">
-      <div class="tc-label">Weight Loss</div>
-      <div class="tc-cal" id="lossCal">0</div>
-      <div class="tc-sub">&minus;500 cal &middot; ~0.5 kg/wk</div>
-      <button class="tc-select" data-target="loss">Select</button>
-    </div>
-    <div class="target-card gain">
-      <div class="tc-label">Weight Gain</div>
-      <div class="tc-cal" id="gainCal">0</div>
-      <div class="tc-sub">+500 cal &middot; ~0.5 kg/wk</div>
-      <button class="tc-select" data-target="gain">Select</button>
-    </div>
-  </div>
-
-  <div class="card" id="activityCard" style="display:none;">
-    <h3>Calories by activity level</h3>
-    <p style="font-size:12.5px; color:var(--ink-soft); margin:0 0 10px;">Your BMR stays the same &mdash; only the multiplier changes. Here's how your maintenance calories would shift at each activity level, so you can double-check you picked the right one.</p>
-    <table class="activity-table">
-      <thead><tr><th>Level</th><th></th><th class="cal-col">Cal/day</th></tr></thead>
-      <tbody id="activityTableBody"></tbody>
-    </table>
-  </div>
-
-  <div class="card" id="idealWeightCard" style="display:none;">
-    <h3>Ideal body weight</h3>
-    <div class="idealweight-range" id="idealWeightRange">&mdash;</div>
-    <p style="font-size:12px; color:var(--muted); text-align:center; margin:0 0 14px;">Estimated range across 4 classic formulas &mdash; these predate BMI and are population averages, not individual targets, especially if you carry significant muscle.</p>
-    <table class="idealweight-table" id="idealWeightTable"></table>
-  </div>
-
-  <div class="card macro-card" id="macroCard">
-    <h3>Macro Calculator</h3>
-    <div class="macro-basis" id="macroBasis">Based on <b>&mdash;</b> calories/day</div>
-
-    <div class="style-toggle">
-      <button class="styleBtn active" data-style="balanced">Balanced</button>
-      <button class="styleBtn" data-style="highprotein">High Protein</button>
-      <button class="styleBtn" data-style="lowcarb">Low Carb</button>
+    <div class="poison-box">
+      <b>Signs of alcohol poisoning</b> (seek emergency help immediately): confusion or unresponsiveness, vomiting while unconscious, slow or irregular breathing, seizures, pale or blue-tinged skin, low body temperature. Don't wait for all symptoms &mdash; call emergency services if you suspect alcohol poisoning in yourself or someone else.
     </div>
 
-    <div class="macro-row">
-      <div class="macro-swatch" style="background:var(--protein);"></div>
-      <div class="mr-name">Protein</div>
-      <div class="mr-pct" id="proteinPct">30%</div>
-      <div class="mr-grams" id="proteinGrams">0g</div>
-    </div>
-    <div class="macro-row">
-      <div class="macro-swatch" style="background:var(--carb);"></div>
-      <div class="mr-name">Carbohydrates</div>
-      <div class="mr-pct" id="carbPct">40%</div>
-      <div class="mr-grams" id="carbGrams">0g</div>
-    </div>
-    <div class="macro-row">
-      <div class="macro-swatch" style="background:var(--fat);"></div>
-      <div class="mr-name">Fat</div>
-      <div class="mr-pct" id="fatPct">30%</div>
-      <div class="mr-grams" id="fatGrams">0g</div>
-    </div>
+    <div class="cc-crosslink">Curious about the calories in what you're drinking? Check the <a href="https://healthylifescale.com">Calorie Tracker</a>.</div>
 
-    <button class="use-goal-btn" id="useGoalBtn">Use as my calorie &amp; protein goal</button>
+    <div class="bac-result-note">
+      <b>&#9888; This is not a safety or legal determination.</b>
+      <p>Never use this number to decide whether to drive. Actual impairment and legal risk don't depend only on BAC &mdash; and this estimate can be meaningfully wrong for your specific body and situation. If you've had anything to drink and might drive, choose not to. Arrange a ride instead.</p>
+    </div>
   </div>
 
   <div class="card">
     <h3>How it works</h3>
     <ol class="howworks-list">
-      <li><b>We calculate your BMR.</b> If you enter your body fat %, we use the Katch-McArdle formula (based on your lean body mass) &mdash; the more accurate option when body composition is known. Otherwise we use Mifflin-St Jeor (age, gender, height, weight), the most validated formula for the general population.</li>
-      <li><b>We factor in your activity level.</b> BMR &times; an activity multiplier gives your TDEE (Total Daily Energy Expenditure) &mdash; your maintenance calories. The activity comparison table shows how each level would change your number, so you can sanity-check your pick.</li>
-      <li><b>Three targets appear.</b> Maintenance (your TDEE), Weight Loss (&minus;500 cal/day, roughly 0.5 kg/week), and Weight Gain (+500 cal/day).</li>
-      <li><b>You also get BMI and ideal weight range.</b> Calculated from the same height/weight, using four classic ideal-body-weight formulas (Hamwi, Devine, Robinson, Miller) averaged together.</li>
-      <li><b>Pick a macro style.</b> Choose which target to build macros around, then a split (Balanced, High Protein, or Low Carb) to see exact grams of protein, carbs, and fat.</li>
-      <li><b>Push it to your tracker.</b> "Use as my goal" sends your chosen calories and protein straight to the Calorie Tracker's daily goal.</li>
+      <li><b>We estimate total alcohol consumed</b> from your number of standard drinks.</li>
+      <li><b>We apply the Widmark formula,</b> which factors in your body weight and biological sex (which affects average body water distribution).</li>
+      <li><b>We subtract elimination over time,</b> using a standard average metabolism rate of about 0.015% per hour.</li>
+      <li><b>The result is a rough estimate</b> — not a measurement, and not something to base a driving decision on.</li>
     </ol>
-    <p class="howworks-note">These are population-level formulas, not individualized prescriptions &mdash; actual metabolism varies by individual, even with body fat % factored in.</p>
+    <p class="howworks-note">Real BAC depends on factors this formula can't measure: food in your stomach, medications, individual metabolism, drink strength, and more. Treat this as educational context only.</p>
   </div>
 
   <div class="card">
-    <h2 class="section-title" style="font-family:'Archivo Black',sans-serif; font-size:17px; text-transform:uppercase; letter-spacing:-0.01em; margin:0 0 14px;">Frequently asked questions</h2>
-    <div id="faqList">
-      <div class="faq-item">
-        <button class="faq-q">What's the difference between BMR and TDEE?<span class="faq-icon">+</span></button>
-        <div class="faq-a">BMR (Basal Metabolic Rate) is the calories your body burns at complete rest. TDEE (Total Daily Energy Expenditure) adds your activity level on top of that — TDEE is your actual maintenance calorie number.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">How many calories should I eat to lose weight?<span class="faq-icon">+</span></button>
-        <div class="faq-a">A common approach is eating around 500 calories below your TDEE per day, which typically leads to about 0.5kg (1lb) of weight loss per week — shown as the "Weight Loss" target above.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">How accurate is this TDEE calculator?<span class="faq-icon">+</span></button>
-        <div class="faq-a">If you don't enter body fat %, it uses Mifflin-St Jeor, one of the most widely validated formulas for estimating calorie needs. If you do enter body fat %, it switches to Katch-McArdle, which is generally more accurate since it's based on your actual lean body mass rather than a population average. Either way, individual metabolism can still vary by 10–15% from the estimate.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">What's the Katch-McArdle formula, and why does body fat % matter?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Katch-McArdle calculates BMR from your lean body mass (total weight minus fat mass) instead of age and gender averages. Two people with the same height, weight, age, and gender can have very different metabolisms if one carries more muscle — Katch-McArdle accounts for that difference, which is why it's considered more accurate when you know your body fat percentage.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">What is "ideal body weight" and how is it calculated?<span class="faq-icon">+</span></button>
-        <div class="faq-a">It's an estimated healthy weight range based on your height, calculated using four classic medical formulas (Hamwi, Devine, Robinson, and Miller) that predate BMI. They're population averages from decades-old studies, not individual targets — someone with more muscle mass than average will reasonably weigh more than these ranges suggest.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">How many calories should I eat to lose weight?<span class="faq-icon">+</span></button>
-        <div class="faq-a">A common approach is eating around 500 calories below your TDEE per day, which typically leads to about 0.5kg (1lb) of weight loss per week — shown as the "Weight Loss" target above.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">What macro split is best for cutting or weight loss?<span class="faq-icon">+</span></button>
-        <div class="faq-a">A higher-protein split (like the "High Protein" option here) is often recommended during a calorie deficit, since it helps preserve muscle mass while losing fat.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Can I send my calculated calories straight to a food tracker?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes — the "Use as my calorie & protein goal" button sends your chosen target directly to the Calorie Tracker's daily goal.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Does this calculator remember my details for next time?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes — your age, height, weight, gender, and activity level are saved privately in your browser, so they're pre-filled the next time you visit. Nothing is sent to a server.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Should I recalculate my TDEE as my weight changes?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes — TDEE shifts as your weight changes, since it's partly based on body weight. It's worth recalculating every few weeks, especially during active weight loss or gain, to keep your targets accurate.</div>
-      </div>
+    <h3>Frequently asked questions</h3>
+    <div class="faq-item">
+      <button class="faq-q">Can this calculator tell me if I'm safe to drive?<span class="faq-icon">+</span></button>
+      <div class="faq-a">No. This is an educational estimate only. Actual BAC is affected by many factors this formula can't account for, and can be significantly wrong in either direction. The only safe choice after drinking is not to drive — use a rideshare, taxi, or designated driver instead.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What formula does this use?<span class="faq-icon">+</span></button>
+      <div class="faq-a">The Widmark formula, a standard method from forensic toxicology that estimates BAC from alcohol consumed, body weight, biological sex, and time elapsed. It's a population-average estimate, not a personalized measurement.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What counts as one standard drink?<span class="faq-icon">+</span></button>
+      <div class="faq-a">In the US, about 14 grams of pure alcohol — roughly a 12 oz beer at 5% ABV, a 5 oz glass of wine at 12% ABV, or a 1.5 oz shot of spirits at 40% ABV. Many drinks contain more than one standard drink.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Why do the results vary so much between calculators?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Because the Widmark formula relies on population-average constants that don't capture individual variation — body composition, stomach contents, medications, liver function, and drink strength all affect real BAC. This is exactly why the estimate should never be used to judge whether you're safe or legal to drive.</div>
     </div>
   </div>
+
   <div class="card">
     <h3>Explore other tools</h3>
-    <div class="explore-grid">
-      <a href="https://healthylifescale.com" class="explore-card">
-        <div class="ec-name">Calorie Tracker</div>
-        <div class="ec-desc">Search 240+ foods and track daily calories, protein, carbs, fat, fiber, sugar & sodium.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://bmi.healthylifescale.com" class="explore-card">
-        <div class="ec-name">BMI Calculator</div>
-        <div class="ec-desc">Check your Body Mass Index and healthy weight range.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://water.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Water Intake</div>
-        <div class="ec-desc">Get a daily hydration goal and log glasses as you drink.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://sleep.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Sleep Calculator</div>
-        <div class="ec-desc">Find your ideal bedtime or wake-up time by sleep cycle.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://duedate.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Pregnancy Due Date</div>
-        <div class="ec-desc">Estimate your pregnancy due date and gestational age.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://pregnancyweight.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Pregnancy Weight</div>
-        <div class="ec-desc">See your recommended pregnancy weight gain range.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://period.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Period Tracker</div>
-        <div class="ec-desc">Estimate your next period, ovulation day, and fertile window.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://height.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Height Predictor</div>
-        <div class="ec-desc">Estimate a child's adult height from parents' heights.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://bloodpressure.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Blood Pressure Calculator</div>
-        <div class="ec-desc">Check your reading against AHA blood pressure categories.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://heartage.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Heart Age Calculator</div>
-        <div class="ec-desc">See how lifestyle factors compare your heart age to your real age.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://breathholding.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Breath Holding Test</div>
-        <div class="ec-desc">Time how long you can hold your breath and see how it compares.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://ascvd.healthylifescale.com" class="explore-card">
-        <div class="ec-name">ASCVD Risk Calculator</div>
-        <div class="ec-desc">Estimate your 10-year heart disease and stroke risk tier.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://symptoms.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Symptom Checker</div>
-        <div class="ec-desc">Select your symptoms and find out how urgently to seek care.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-      <a href="https://mentalhealth.healthylifescale.com" class="explore-card">
-        <div class="ec-name">Mental Health Survey</div>
-        <div class="ec-desc">A private PHQ-9 / GAD-7 depression & anxiety screening.</div>
-        <div class="ec-arrow">Open &rarr;</div>
-      </a>
-<a href="https://fertility.healthylifescale.com" class="explore-card"><div class="ec-name">Fertility Checklist</div><div class="ec-desc">Check lifestyle factors linked to sperm health and track over time.</div><div class="ec-arrow">Open &rarr;</div></a>
-<a href="https://gripstrength.healthylifescale.com" class="explore-card"><div class="ec-name">Grip Strength Calculator</div><div class="ec-desc">Benchmark your handgrip strength by age and sex.</div><div class="ec-arrow">Open &rarr;</div></a>
+    <div class="explore-grid" id="exploreGrid">
+    <a href="https://healthylifescale.com" class="explore-card"><div class="ec-name">Calorie Tracker</div><div class="ec-desc">Search 240+ foods and track daily calories, protein, carbs, fat, fiber, sugar & sodium.</div><div class="ec-arrow">Open &rarr;</div></a>
+    <a href="https://mentalhealth.healthylifescale.com" class="explore-card"><div class="ec-name">Mental Health Survey</div><div class="ec-desc">A private PHQ-9 / GAD-7 depression & anxiety screening.</div><div class="ec-arrow">Open &rarr;</div></a>
+    <a href="https://bmr.healthylifescale.com" class="explore-card"><div class="ec-name">TDEE & Macro Calculator</div><div class="ec-desc">Find your daily calorie needs and a personalized macro split.</div><div class="ec-arrow">Open &rarr;</div></a>
     </div>
-  </div>
-
-  <div class="disclaimer">
-    Estimates use the Mifflin-St Jeor equation for BMR (or Katch-McArdle if body fat % is provided) and standard 500-calorie deficit/surplus conventions for loss/gain (roughly 0.5 kg or ~1 lb per week). Ideal body weight uses four population-average formulas (Hamwi, Devine, Robinson, Miller). Macro splits are general presets, not personalized prescriptions. Not medical advice &mdash; consult a professional for individualized guidance, especially with significant calorie deficits.
   </div>
 
   <footer class="site-footer">
     <div class="footer-about">
       <h3>About Healthy Life Scale</h3>
-      <p>Healthy Life Scale is a collection of free health and wellness calculators &mdash; a calorie and macro tracker, BMI calculator, water intake calculator, TDEE calculator, sleep calculator, pregnancy due date and weight gain calculators, period and ovulation tracker, child height predictor, blood pressure calculator, heart age calculator, and breath holding test. Every tool is free to use, works without an account or app download, and saves your data privately on your own device rather than a server. Built for anyone who wants quick, practical health calculators without ads, logins, or paywalls.</p>
+      <p>Healthy Life Scale is a collection of free health and wellness calculators &mdash; a calorie and macro tracker, BMI calculator, water intake calculator, TDEE calculator, sleep calculator, pregnancy due date and weight gain calculators, period and ovulation tracker, child height predictor, blood pressure calculator, heart age calculator, breath holding test, ASCVD heart risk calculator, symptom checker, and a PHQ-9/GAD-7 mental health survey. Every tool is free to use, works without an account or app download, and saves your data privately on your own device rather than a server. Built for anyone who wants quick, practical health calculators without ads, logins, or paywalls.</p>
     </div>
     <div class="footer-links-title">All tools</div>
     <div class="footer-links">
       <a href="https://healthylifescale.com">Calorie Tracker</a>
       <a href="https://bmi.healthylifescale.com">BMI Calculator</a>
+      <a href="https://bodyfat.healthylifescale.com">Body Fat % Calculator</a>
+      <a href="https://waisttohip.healthylifescale.com">Waist-to-Hip Ratio Calculator</a>
+      <a href="https://framesize.healthylifescale.com">Body Frame Size Calculator</a>
       <a href="https://water.healthylifescale.com">Water Intake Calculator</a>
-      <a href="https://bmr.healthylifescale.com" style="font-weight:700;color:var(--ink);">TDEE & Macro Calculator</a>
+      <a href="https://bmr.healthylifescale.com">TDEE & Macro Calculator</a>
+      <a href="https://protein.healthylifescale.com">Protein Intake Calculator</a>
+      <a href="https://caloriesburned.healthylifescale.com">Calories Burned Calculator</a>
       <a href="https://sleep.healthylifescale.com">Sleep Calculator</a>
+      <a href="https://nap.healthylifescale.com">Nap Calculator</a>
       <a href="https://duedate.healthylifescale.com">Pregnancy Due Date Calculator</a>
       <a href="https://pregnancyweight.healthylifescale.com">Pregnancy Weight Gain Calculator</a>
       <a href="https://period.healthylifescale.com">Period & Ovulation Tracker</a>
       <a href="https://height.healthylifescale.com">Child Height Predictor</a>
       <a href="https://bloodpressure.healthylifescale.com">Blood Pressure Calculator</a>
       <a href="https://heartage.healthylifescale.com">Heart Age Calculator</a>
-      <a href="https://breathholding.healthylifescale.com">Breath Holding Test</a>
       <a href="https://ascvd.healthylifescale.com">ASCVD Risk Calculator</a>
-      <a href="https://mentalhealth.healthylifescale.com">Mental Health Survey</a>
-<a href="https://fertility.healthylifescale.com">Fertility Checklist</a>
-<a href="https://gripstrength.healthylifescale.com">Grip Strength Calculator</a>
+      <a href="https://heartratezone.healthylifescale.com">Target Heart Rate Zone</a>
+      <a href="https://breathholding.healthylifescale.com">Breath Holding Test</a>
+      <a href="https://pace.healthylifescale.com">Running Pace Calculator</a>
       <a href="https://symptoms.healthylifescale.com">Symptom Checker</a>
+      <a href="https://mentalhealth.healthylifescale.com">Mental Health Survey</a>
+      <a href="https://fertility.healthylifescale.com">Fertility Checklist</a>
+      <a href="https://gripstrength.healthylifescale.com">Grip Strength Calculator</a>
+      <a href="https://onerepmax.healthylifescale.com">One-Rep Max Calculator</a>
+      <a href="https://bac.healthylifescale.com" style="font-weight:700;color:var(--ink);">BAC Calculator</a>
     </div>
-        <div class="footer-legal">
+    <div class="footer-legal">
       <a href="https://healthylifescale.com/privacy-policy.html">Privacy Policy</a><span class="fl-dot">&middot;</span><a href="https://healthylifescale.com/about.html">About</a>
     </div>
-
     <div class="footer-bottom">
       &copy; 2026 Healthy Life Scale. All tools are educational and provide general estimates only &mdash; they are not medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider for medical concerns.
     </div>
   </footer>
 
 </div>
-
+</body>
+</html>
 <script>
 (function(){
   const $ = id => document.getElementById(id);
@@ -744,249 +596,64 @@
     });
   });
 
-  const hasClaudeStorage = typeof window.storage !== 'undefined' && window.storage;
-  let localStorageOK = true;
-  try{ localStorage.setItem('__test__','1'); localStorage.removeItem('__test__'); }catch(e){ localStorageOK = false; }
-  const store = {
-    async get(key){
-      if(hasClaudeStorage){ try{ const r = await window.storage.get(key, false); return r ? r.value : null; }catch(e){ return null; } }
-      if(!localStorageOK) return null;
-      try{ return localStorage.getItem(key); }catch(e){ return null; }
-    },
-    async set(key, value){
-      if(hasClaudeStorage){ try{ await window.storage.set(key, value, false); return true; }catch(e){ return false; } }
-      if(!localStorageOK) return false;
-      try{ localStorage.setItem(key, value); return true; }catch(e){ return false; }
-    }
-  };
-
+  let units = 'kg';
   let gender = 'male';
+
+  $('unitKg').addEventListener('click', ()=>{
+    units = 'kg';
+    $('unitKg').classList.add('active'); $('unitLb').classList.remove('active');
+    $('weightVal').placeholder = 'e.g. 75';
+    $('weightLabel').textContent = 'Weight (kg)';
+  });
+  $('unitLb').addEventListener('click', ()=>{
+    units = 'lb';
+    $('unitLb').classList.add('active'); $('unitKg').classList.remove('active');
+    $('weightVal').placeholder = 'e.g. 165';
+    $('weightLabel').textContent = 'Weight (lb)';
+  });
   $('genderMale').addEventListener('click', ()=>{ gender='male'; $('genderMale').classList.add('active'); $('genderFemale').classList.remove('active'); });
   $('genderFemale').addEventListener('click', ()=>{ gender='female'; $('genderFemale').classList.add('active'); $('genderMale').classList.remove('active'); });
 
-  let units = 'metric';
-  $('unitMetric').addEventListener('click', ()=>{
-    units = 'metric';
-    $('unitMetric').classList.add('active'); $('unitImperial').classList.remove('active');
-    $('metricFields').style.display = 'block'; $('imperialFields').style.display = 'none';
-  });
-  $('unitImperial').addEventListener('click', ()=>{
-    units = 'imperial';
-    $('unitImperial').classList.add('active'); $('unitMetric').classList.remove('active');
-    $('imperialFields').style.display = 'block'; $('metricFields').style.display = 'none';
-  });
+  const WIDMARK_R = { male: 0.68, female: 0.55 };
+  const GRAMS_PER_DRINK = 14;
 
-  async function saveLastInputs(){
-    const data = {
-      age: $('age').value, activity: $('activity').value, gender: gender, units: units, bodyfat: $('bodyfat').value,
-      heightCm: $('heightCm').value, weightKg: $('weightKg').value,
-      heightFt: $('heightFt').value, heightIn: $('heightIn').value, weightLb: $('weightLb').value
-    };
-    await store.set('tdee_last_inputs', JSON.stringify(data));
-  }
-  async function restoreLastInputs(){
-    try{
-      const v = await store.get('tdee_last_inputs');
-      if(!v) return;
-      const data = JSON.parse(v);
-      if(data.age) $('age').value = data.age;
-      if(data.activity) $('activity').value = data.activity;
-      if(data.bodyfat) $('bodyfat').value = data.bodyfat;
-      if(data.heightCm) $('heightCm').value = data.heightCm;
-      if(data.weightKg) $('weightKg').value = data.weightKg;
-      if(data.heightFt) $('heightFt').value = data.heightFt;
-      if(data.heightIn) $('heightIn').value = data.heightIn;
-      if(data.weightLb) $('weightLb').value = data.weightLb;
-      if(data.gender === 'female'){ gender = 'female'; $('genderFemale').classList.add('active'); $('genderMale').classList.remove('active'); }
-      if(data.units === 'imperial'){ $('unitImperial').click(); }
-    }catch(e){}
-  }
-  restoreLastInputs();
+  // General public-health reference ranges (purely informational — not a personalized safety claim)
+  const REFERENCE_RANGES = [
+    { range:'0.02\u20130.03%', min:0.02, max:0.03, desc:'Slight mood and relaxation changes' },
+    { range:'0.04\u20130.06%', min:0.04, max:0.06, desc:'Feeling of well-being, lowered inhibitions' },
+    { range:'0.07\u20130.09%', min:0.07, max:0.09, desc:'Impaired balance, speech, and reaction time' },
+    { range:'0.10\u20130.15%', min:0.10, max:0.15, desc:'Significant impairment, slurred speech' },
+    { range:'0.16\u20130.30%', min:0.16, max:0.30, desc:'Confusion, possible blackout, risk of vomiting' },
+    { range:'0.31%+', min:0.31, max:99, desc:'Severe risk of alcohol poisoning' }
+  ];
 
-  const MACRO_STYLES = {
-    balanced:    { protein: 30, carb: 40, fat: 30 },
-    highprotein: { protein: 40, carb: 30, fat: 30 },
-    lowcarb:     { protein: 35, carb: 20, fat: 45 }
-  };
-
-  let calorieTargets = { maintain: 0, loss: 0, gain: 0 };
-  let selectedTarget = 'maintain';
-  let selectedStyle = 'balanced';
-
-  document.querySelectorAll('.styleBtn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.styleBtn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      selectedStyle = btn.getAttribute('data-style');
-      renderMacros();
-    });
-  });
-
-  document.querySelectorAll('.tc-select').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('.tc-select').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      selectedTarget = btn.getAttribute('data-target');
-      renderMacros();
-    });
-  });
-
-  function renderMacros(){
-    const cal = calorieTargets[selectedTarget];
-    const labelMap = { maintain: 'Maintenance', loss: 'Weight Loss', gain: 'Weight Gain' };
-    $('macroBasis').innerHTML = 'Based on <b>' + Math.round(cal) + '</b> calories/day (' + labelMap[selectedTarget] + ')';
-
-    const style = MACRO_STYLES[selectedStyle];
-    const proteinCal = cal * (style.protein/100);
-    const carbCal = cal * (style.carb/100);
-    const fatCal = cal * (style.fat/100);
-
-    const proteinG = Math.round(proteinCal / 4);
-    const carbG = Math.round(carbCal / 4);
-    const fatG = Math.round(fatCal / 9);
-
-    $('proteinPct').textContent = style.protein + '%';
-    $('carbPct').textContent = style.carb + '%';
-    $('fatPct').textContent = style.fat + '%';
-    $('proteinGrams').textContent = proteinG + 'g';
-    $('carbGrams').textContent = carbG + 'g';
-    $('fatGrams').textContent = fatG + 'g';
-
-    $('macroCard').classList.add('show');
-    $('useGoalBtn').classList.remove('done');
-    $('useGoalBtn').textContent = 'Use as my calorie & protein goal';
-
-    $('useGoalBtn').onclick = async ()=>{
-      let settings = { calorieGoal: null, proteinGoal: null };
-      try{ const v = await store.get('settings'); if(v) settings = JSON.parse(v); }catch(e){}
-      settings.calorieGoal = Math.round(cal);
-      settings.proteinGoal = proteinG;
-      await store.set('settings', JSON.stringify(settings));
-      $('useGoalBtn').classList.add('done');
-      $('useGoalBtn').textContent = 'Goal set \u2713';
-    };
-  }
-
-  $('calcBtn').addEventListener('click', async ()=>{
-    const age = parseFloat($('age').value);
-    const activity = parseFloat($('activity').value);
-    const bodyfat = parseFloat($('bodyfat').value);
-
-    let h, w;
-    if(units === 'metric'){
-      h = parseFloat($('heightCm').value);
-      w = parseFloat($('weightKg').value);
-    } else {
-      const ft = parseFloat($('heightFt').value) || 0;
-      const inch = parseFloat($('heightIn').value) || 0;
-      const lb = parseFloat($('weightLb').value);
-      h = (ft * 12 + inch) * 2.54;
-      w = lb ? lb / 2.20462 : NaN;
+  $('calcBtn').addEventListener('click', ()=>{
+    const weightRaw = parseFloat($('weightVal').value);
+    const drinks = parseFloat($('drinksVal').value);
+    const hours = parseFloat($('hoursVal').value);
+    if(!weightRaw || drinks === undefined || drinks === null || isNaN(drinks) || hours === undefined || hours === null || isNaN(hours)){
+      alert('Please fill in weight, drinks, and hours.');
+      return;
     }
 
-    if(!age || !h || !w){ alert('Please fill in age, height, and weight.'); return; }
+    const weightKg = units === 'lb' ? weightRaw / 2.20462 : weightRaw;
+    const weightG = weightKg * 1000;
+    const alcoholGrams = drinks * GRAMS_PER_DRINK;
+    const r = WIDMARK_R[gender];
 
-    await saveLastInputs();
+    let bac = ((alcoholGrams / (weightG * r)) * 100) - (0.015 * hours);
+    bac = Math.max(0, bac);
 
-    // --- BMR: Katch-McArdle (if body fat % given) is more accurate since it's based on
-    // lean body mass rather than a population-average formula. Otherwise, Mifflin-St Jeor,
-    // the most validated equation when body composition isn't known.
-    let bmr, formulaUsed, leanMass = null;
-    const hasValidBodyfat = bodyfat && bodyfat >= 3 && bodyfat <= 60;
-    if(hasValidBodyfat){
-      leanMass = w * (1 - bodyfat/100);
-      bmr = 370 + (21.6 * leanMass);
-      formulaUsed = 'katch';
-    } else {
-      if(gender === 'male'){ bmr = 10*w + 6.25*h - 5*age + 5; }
-      else { bmr = 10*w + 6.25*h - 5*age - 161; }
-      formulaUsed = 'mifflin';
-    }
-    const tdee = bmr * activity;
+    $('bacValue').textContent = bac.toFixed(3) + '%';
 
-    calorieTargets = {
-      maintain: Math.round(tdee),
-      loss: Math.round(tdee - 500),
-      gain: Math.round(tdee + 500)
-    };
+    $('bacTable').innerHTML = '<tr><th>Range</th><th>General effects</th></tr>' +
+      REFERENCE_RANGES.map(r => {
+        const inRange = bac >= r.min && bac <= r.max;
+        return `<tr class="${inRange ? 'hl' : ''}"><td>${r.range}</td><td>${r.desc}</td></tr>`;
+      }).join('');
 
-    $('bmrLine').innerHTML = 'Your BMR (calories at rest): <b>' + Math.round(bmr) + ' cal/day</b>';
-    $('bmrLine').classList.add('show');
-    if($('bmrLine').scrollIntoView){ $('bmrLine').scrollIntoView({behavior:'smooth', block:'start'}); }
-
-    if(formulaUsed === 'katch'){
-      $('formulaBadge').innerHTML = 'Using the <b>Katch-McArdle</b> formula \u2014 based on your ' + Math.round(leanMass) + 'kg lean body mass (more accurate than a population-average formula)';
-    } else {
-      $('formulaBadge').innerHTML = 'Using the <b>Mifflin-St Jeor</b> formula \u2014 add your body fat % above for an even more precise estimate';
-    }
-    $('formulaBadge').classList.add('show');
-
-    $('maintainCal').textContent = calorieTargets.maintain;
-    $('lossCal').textContent = calorieTargets.loss;
-    $('gainCal').textContent = calorieTargets.gain;
-    $('targetsGrid').classList.add('show');
-
-    document.querySelectorAll('.tc-select').forEach(b=>b.classList.remove('selected'));
-    document.querySelector('.tc-select[data-target="maintain"]').classList.add('selected');
-    selectedTarget = 'maintain';
-
-    // --- BMI ---
-    const heightM = h / 100;
-    const bmi = w / (heightM * heightM);
-    $('bmiValue').textContent = bmi.toFixed(1);
-    let bmiCat = 'Normal weight';
-    if(bmi < 18.5) bmiCat = 'Underweight';
-    else if(bmi < 25) bmiCat = 'Normal weight';
-    else if(bmi < 30) bmiCat = 'Overweight';
-    else bmiCat = 'Obese';
-    $('bmiCategory').textContent = bmiCat;
-
-    // --- Ideal body weight: 4 classic formulas, all originally in kg + inches over 5ft ---
-    const totalInches = h / 2.54;
-    const inchesOver5ft = totalInches - 60;
-    const IBW_FORMULAS = gender === 'male'
-      ? [
-          { name: 'G.J. Hamwi', year: '1964', base: 48.0, perInch: 2.7 },
-          { name: 'B.J. Devine', year: '1974', base: 50.0, perInch: 2.3 },
-          { name: 'J.D. Robinson', year: '1983', base: 52.0, perInch: 1.9 },
-          { name: 'D.R. Miller', year: '1983', base: 56.2, perInch: 1.41 }
-        ]
-      : [
-          { name: 'G.J. Hamwi', year: '1964', base: 45.5, perInch: 2.2 },
-          { name: 'B.J. Devine', year: '1974', base: 45.5, perInch: 2.3 },
-          { name: 'J.D. Robinson', year: '1983', base: 49.0, perInch: 1.7 },
-          { name: 'D.R. Miller', year: '1983', base: 53.1, perInch: 1.36 }
-        ];
-    const ibwResults = IBW_FORMULAS.map(f => Math.max(30, f.base + f.perInch * inchesOver5ft));
-    const ibwMin = Math.min(...ibwResults);
-    const ibwMax = Math.max(...ibwResults);
-    const unitLabel = units === 'metric' ? 'kg' : 'lb';
-    const toDisplayUnit = kg => units === 'metric' ? kg : kg * 2.20462;
-    $('idealWeightRange').textContent = Math.round(toDisplayUnit(ibwMin)) + '\u2013' + Math.round(toDisplayUnit(ibwMax)) + ' ' + unitLabel;
-    $('idealWeightQuick').textContent = Math.round(toDisplayUnit(ibwMin)) + '\u2013' + Math.round(toDisplayUnit(ibwMax));
-    $('idealWeightTable').innerHTML = IBW_FORMULAS.map((f,i) => `
-      <tr><td>${f.name} <span class="iw-year">(${f.year})</span></td><td class="iw-val">${Math.round(toDisplayUnit(ibwResults[i]))} ${unitLabel}</td></tr>
-    `).join('');
-    $('idealWeightCard').style.display = 'block';
-    $('quickstats').classList.add('show');
-
-    // --- Activity level comparison table ---
-    const ACTIVITY_LEVELS = [
-      { mult: 1.2, label: 'Sedentary', desc: 'Desk job, no exercise' },
-      { mult: 1.375, label: 'Light', desc: 'Exercise 1\u20133 days/wk' },
-      { mult: 1.55, label: 'Moderate', desc: 'Exercise 3\u20135 days/wk' },
-      { mult: 1.725, label: 'Active', desc: 'Exercise 6\u20137 days/wk' },
-      { mult: 1.9, label: 'Very active', desc: 'Physical job / athlete' }
-    ];
-    $('activityTableBody').innerHTML = ACTIVITY_LEVELS.map(lvl => {
-      const isSelected = Math.abs(lvl.mult - activity) < 0.001;
-      return `<tr class="${isSelected ? 'selected-row' : ''}"><td>${lvl.label}${isSelected ? ' \u2713' : ''}</td><td style="color:var(--muted); font-size:11.5px;">${lvl.desc}</td><td class="cal-col">${Math.round(bmr * lvl.mult)}</td></tr>`;
-    }).join('');
-    $('activityCard').style.display = 'block';
-
-    renderMacros();
+    $('resultCard').classList.add('show');
+    if($('resultCard').scrollIntoView){ $('resultCard').scrollIntoView({behavior:'smooth', block:'start'}); }
   });
 })();
 </script>
-</body>
-</html>
