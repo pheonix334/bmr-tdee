@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#B23A2F">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.googletagservices.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://pagead2.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P41HN02DDV"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6021714937287056"
+     crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P41HN02DDV');
+</script>
+<title>TDEE Calculator &mdash; Free Macro Split, Cut &amp; Bulk Calories</title>
+<meta name="description" content="Free TDEE &amp; macro calculator using Mifflin-St Jeor or Katch-McArdle. Get maintenance, cut &amp; bulk calorie targets plus a macro breakdown.">
+<meta property="og:title" content="Free TDEE & Macro Calculator | Healthy Life Scale">
+<meta property="og:description" content="Find your daily calorie needs with Mifflin-St Jeor or Katch-McArdle, plus BMI and ideal weight, then track against it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bmr.healthylifescale.com/">
+<meta property="og:image" content="https://healthylifescale.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Healthy Life Scale">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free TDEE & Macro Calculator | Healthy Life Scale">
+<meta name="twitter:description" content="Find your daily calorie needs with Mifflin-St Jeor or Katch-McArdle, plus BMI and ideal weight, then track against it.">
+<meta name="twitter:image" content="https://healthylifescale.com/og-image.png">
+<link rel="canonical" href="https://bmr.healthylifescale.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F0; --paper-raised:#FFFFFF; --ink:#191918; --ink-soft:#585448;
+    --muted:#8A8577; --protein:#B23A2F; --carb:#C08A17; --fat:#5C6B2E; --fiber:#3A6B6B;
+    --danger:#B23A2F; --hair:#DEDACD;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+  #root{ max-width:660px; margin:0 auto; padding:28px 18px 80px; }
+
+  .site-header{ position:sticky; top:0; z-index:100; background:var(--paper); border-bottom:1.5px solid var(--ink); margin-bottom:22px; padding:14px 0; }
+  #resultCard, #bmrLine, #resultBanner, #ccResults, #resultLabel{ scroll-margin-top: 80px; }
+  .site-header-inner{ display:flex; align-items:center; justify-content:space-between; position:relative; }
+  .site-logo{ display:flex; align-items:center; gap:7px; font-family:'Archivo Black',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:-0.01em; color:var(--ink); text-decoration:none; white-space:nowrap; }
+  .site-logo .logo-icon{ flex-shrink:0; display:block; }
+
+  .current-page{ font-family:'Space Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.03em; color:var(--muted); display:none; }
+
+  .tools-dropdown{ position:relative; }
+  .tools-btn{
+    display:flex; align-items:center; gap:7px; font-family:'Space Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.03em; background:var(--ink); color:var(--paper);
+    border:1.5px solid var(--ink); padding:9px 14px; border-radius:3px; cursor:pointer;
+    transition:background-color 0.15s ease;
+  }
+  .tools-btn:hover{ background:#33332E; }
+  .tools-btn .chevron{ transition:transform 0.15s ease; flex-shrink:0; }
+  .tools-btn[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
+
+  .tools-menu{
+    display:none; position:absolute; top:calc(100% + 10px); right:0; width:320px; max-width:calc(100vw - 36px);
+    background:var(--paper-raised); border:1.5px solid var(--ink); box-shadow:0 10px 26px rgba(26,26,22,0.16);
+    padding:8px; z-index:200; max-height:70vh; overflow-y:auto;
+  }
+  .tools-menu.open{ display:block; }
+  .tools-menu-label{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); padding:8px 10px 4px; }
+  .tools-menu a{ display:block; padding:10px; border-radius:3px; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--hair); }
+  .tools-menu a:last-child{ border-bottom:none; }
+  .tools-menu a:hover{ background:var(--paper); }
+  .tools-menu .tm-name{ font-weight:700; font-size:13px; margin-bottom:2px; }
+  .tools-menu .tm-desc{ font-size:11px; color:var(--ink-soft); line-height:1.45; }
+
+  @media (min-width:640px){
+    .current-page{ display:block; }
+  }
+
+  .brand{ margin-bottom:22px; }
+  .brand h1{ font-family:'Archivo Black',sans-serif; font-size:25px; letter-spacing:-0.02em; margin:0; text-transform:uppercase; }
+  .brand .sub{ font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.04em; }
+
+  .card{ background:var(--paper-raised); border:1.5px solid var(--ink); padding:20px; margin-bottom:20px; }
+  .card h3{ font-family:'Space Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 14px; color:var(--ink-soft); }
+
+  .unit-toggle{ display:flex; border:1.5px solid var(--ink); border-radius:2px; overflow:hidden; margin-bottom:16px; width:fit-content; }
+  .unit-toggle button{ font-family:'Space Mono',monospace; font-size:11.5px; text-transform:uppercase; padding:7px 14px; border:none; background:var(--paper-raised); color:var(--ink); cursor:pointer; }
+  .unit-toggle button.active{ background:var(--ink); color:var(--paper); }
+
+  .gender-toggle{ display:flex; border:1.5px solid var(--ink); border-radius:2px; overflow:hidden; margin-bottom:16px; width:fit-content; }
+  .gender-toggle button{ font-family:'Space Mono',monospace; font-size:11.5px; text-transform:uppercase; padding:8px 16px; border:none; background:var(--paper-raised); color:var(--ink); cursor:pointer; }
+  .gender-toggle button.active{ background:var(--ink); color:var(--paper); }
+
+    .field-row{ display:flex; flex-direction:column; gap:10px; margin-bottom:10px; }
+  .field{ display:flex; align-items:center; gap:12px; }
+  .field label{ flex:0 0 96px; font-size:11px; color:var(--muted); font-family:'Space Mono',monospace; margin-bottom:0; text-transform:uppercase; letter-spacing:0.03em; }
+  .field input, .field select{ flex:1; min-width:0; padding:9px 10px; border:1.5px solid var(--hair); border-radius:2px; font-family:'Inter',sans-serif; font-size:14px; background:var(--paper); color:var(--ink); }
+  .field input:focus, .field select:focus{ outline:2px solid var(--protein); outline-offset:1px; border-color:var(--protein); }
+  @media (max-width:340px){
+    .field{ flex-direction:column; align-items:stretch; gap:4px; }
+    .field label{ flex:none; }
+  }
+  .field-optional-note{ font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-top:-6px; margin-bottom:12px; }
+
+  .calc-btn{ background:var(--ink); color:var(--paper); border:none; padding:12px 20px; font-family:'Space Mono',monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em; cursor:pointer; border-radius:2px; width:100%; margin-top:6px; }
+  .calc-btn:hover{ background:var(--protein); }
+
+  /* Results: BMR line */
+  .bmr-line{ display:none; font-family:'Space Mono',monospace; font-size:12.5px; color:var(--ink-soft); text-align:center; margin-bottom:6px; }
+  .bmr-line.show{ display:block; }
+  .bmr-line b{ color:var(--ink); }
+  .formula-badge{ display:none; text-align:center; font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-bottom:16px; }
+  .formula-badge.show{ display:block; }
+  .formula-badge b{ color:var(--fiber); }
+
+  /* Quick stats row: BMI + ideal weight snapshot */
+  .quickstats{ display:none; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+  .quickstats.show{ display:grid; }
+  .quickstat-card{ background:var(--paper-raised); border:1.5px solid var(--hair); padding:14px; text-align:center; }
+  .quickstat-card .qs-label{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); margin-bottom:6px; }
+  .quickstat-card .qs-value{ font-family:'Space Mono',monospace; font-weight:700; font-size:19px; }
+  .quickstat-card .qs-sub{ font-size:11px; color:var(--ink-soft); margin-top:3px; }
+  @media (max-width:480px){ .quickstats{ grid-template-columns:1fr; } }
+
+  /* Activity level comparison table */
+  .activity-table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .activity-table th{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); text-align:left; padding:6px 4px; border-bottom:1.5px solid var(--ink); }
+  .activity-table td{ padding:8px 4px; border-bottom:1px solid var(--hair); }
+  .activity-table tr:last-child td{ border-bottom:none; }
+  .activity-table td.cal-col{ font-family:'Space Mono',monospace; text-align:right; font-weight:700; }
+  .activity-table tr.selected-row{ background:var(--paper); }
+  .activity-table tr.selected-row td{ color:var(--fiber); }
+
+  /* Ideal weight table */
+  .idealweight-table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .idealweight-table td{ padding:7px 4px; border-bottom:1px solid var(--hair); }
+  .idealweight-table tr:last-child td{ border-bottom:none; }
+  .idealweight-table td.iw-val{ font-family:'Space Mono',monospace; text-align:right; font-weight:700; }
+  .idealweight-table td.iw-year{ color:var(--muted); font-size:11.5px; }
+  .idealweight-range{ font-family:'Space Mono',monospace; font-weight:700; font-size:20px; text-align:center; margin:2px 0 12px; color:var(--fiber); }
+
+  /* Three calorie target cards */
+  .targets-grid{ display:none; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:20px; }
+  .targets-grid.show{ display:grid; }
+  .target-card{ background:var(--paper-raised); border:2px solid var(--ink); padding:14px 10px; text-align:center; }
+  .target-card.maintain{ border-color:var(--fiber); }
+  .target-card.loss{ border-color:var(--protein); }
+  .target-card.gain{ border-color:var(--carb); }
+  .target-card .tc-label{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); margin-bottom:6px; }
+  .target-card .tc-cal{ font-family:'Space Mono',monospace; font-weight:700; font-size:22px; line-height:1; }
+  .target-card .tc-sub{ font-family:'Space Mono',monospace; font-size:9.5px; color:var(--muted); margin-top:5px; }
+  .target-card .tc-select{ margin-top:10px; width:100%; background:none; border:1.5px solid var(--ink); color:var(--ink); padding:5px; font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; cursor:pointer; border-radius:2px; }
+  .target-card .tc-select:hover{ background:var(--ink); color:var(--paper); }
+  .target-card .tc-select.selected{ background:var(--ink); color:var(--paper); }
+
+  @media (max-width:480px){
+    .targets-grid{ grid-template-columns:1fr; gap:10px; }
+  }
+
+  /* Macro calculator */
+  .macro-card{ display:none; }
+  .macro-card.show{ display:block; }
+  .macro-basis{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft); margin-bottom:14px; }
+  .macro-basis b{ color:var(--ink); }
+  .style-toggle{ display:flex; border:1.5px solid var(--ink); border-radius:2px; overflow:hidden; margin-bottom:18px; }
+  .style-toggle button{ flex:1; font-family:'Space Mono',monospace; font-size:10.5px; text-transform:uppercase; padding:9px 4px; border:none; background:var(--paper-raised); color:var(--ink); cursor:pointer; border-right:1px solid var(--ink); }
+  .style-toggle button:last-child{ border-right:none; }
+  .style-toggle button.active{ background:var(--ink); color:var(--paper); }
+
+  .macro-row{ display:flex; align-items:center; padding:10px 0; border-bottom:1px dashed var(--hair); }
+  .macro-row:last-child{ border-bottom:none; }
+  .macro-swatch{ width:12px; height:12px; border-radius:50%; margin-right:10px; flex-shrink:0; }
+  .macro-row .mr-name{ flex:1; font-weight:600; font-size:13.5px; }
+  .macro-row .mr-pct{ font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); width:40px; text-align:right; }
+  .macro-row .mr-grams{ font-family:'Space Mono',monospace; font-weight:700; font-size:15px; width:70px; text-align:right; }
+
+  .use-goal-btn{ background:var(--ink); color:var(--paper); border:none; padding:11px 20px; font-family:'Space Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; cursor:pointer; border-radius:2px; width:100%; margin-top:16px; }
+  .use-goal-btn:hover{ background:var(--fiber); }
+  .use-goal-btn.done{ background:var(--fiber); }
+
+  .disclaimer{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); margin-top:18px; line-height:1.6; }
+  .howworks-list{ margin:0 0 14px; padding-left:20px; font-size:13.5px; line-height:1.75; color:var(--ink-soft); }
+  .howworks-list li{ margin-bottom:8px; }
+  .howworks-list li b{ color:var(--ink); }
+  .howworks-list li:last-child{ margin-bottom:0; }
+  .howworks-note{ font-size:12.5px; color:var(--ink-soft); border-top:1px solid var(--hair); padding-top:12px; margin:0; line-height:1.6; }
+  .explore-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .explore-card{ background:var(--paper-raised); border:1.5px solid var(--hair); padding:13px 14px; text-decoration:none; color:var(--ink); display:block; transition:border-color 0.15s ease, background-color 0.15s ease; }
+  .explore-card:hover{ border-color:var(--ink); background:var(--paper); }
+  .explore-card .ec-name{ font-weight:700; font-size:13.5px; margin-bottom:4px; }
+  .explore-card .ec-desc{ font-size:11.5px; color:var(--ink-soft); line-height:1.45; margin-bottom:8px; }
+  .explore-card .ec-arrow{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; }
+  @media (max-width:520px){ .explore-grid{ grid-template-columns:1fr; } }
+
+  .site-footer{ margin-top:30px; border-top:1.5px solid var(--ink); padding-top:26px; }
+  .footer-about h3{ font-family:'Archivo Black',sans-serif; font-size:15px; text-transform:uppercase; letter-spacing:-0.01em; margin:0 0 10px; }
+  .footer-about p{ font-size:12.5px; line-height:1.75; color:var(--ink-soft); margin:0 0 18px; max-width:560px; }
+  .footer-links-title{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:10px; }
+  .footer-links{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px 16px; margin-bottom:20px; }
+  .footer-links a{ font-size:11.5px; color:var(--protein); text-decoration:underline; text-underline-offset:2px; }
+  .footer-links a:hover{ color:var(--ink); text-decoration:none; }
+    .footer-legal{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); margin-bottom:10px; }
+  .footer-legal a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }
+  .footer-legal a:hover{ color:var(--ink); }
+  .footer-legal .fl-dot{ margin:0 8px; color:var(--hair); }
+
+  .footer-bottom{ font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); border-top:1px solid var(--hair); padding-top:14px; line-height:1.7; }
+  @media (max-width:520px){ .footer-links{ grid-template-columns:1fr 1fr; } }
+
+  .faq-item{ border-bottom:1px solid var(--hair); }
+  .faq-item:last-child{ border-bottom:none; }
+  .faq-q{ width:100%; text-align:left; background:none; border:none; padding:14px 0; font-weight:700; font-size:13.5px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--ink); font-family:'Inter',sans-serif; }
+  .faq-q .faq-icon{ transition:transform 0.15s ease; flex-shrink:0; margin-left:10px; font-family:'Space Mono',monospace; }
+  .faq-q.open .faq-icon{ transform:rotate(45deg); }
+  .faq-a{ display:none; padding:0 0 14px; font-size:13px; line-height:1.65; color:var(--ink-soft); }
+  .faq-a.open{ display:block; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the difference between BMR and TDEE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "BMR (Basal Metabolic Rate) is the calories your body burns at complete rest. TDEE (Total Daily Energy Expenditure) adds your activity level on top of that \u2014 TDEE is your actual maintenance calorie number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many calories should I eat to lose weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A common approach is eating around 500 calories below your TDEE per day, which typically leads to about 0.5kg (1lb) of weight loss per week \u2014 shown as the \"Weight Loss\" target above."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What macro split is best for cutting or weight loss?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A higher-protein split (like the \"High Protein\" option here) is often recommended during a calorie deficit, since it helps preserve muscle mass while losing fat."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How accurate is this TDEE calculator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you don't enter body fat %, it uses Mifflin-St Jeor, one of the most widely validated formulas for estimating calorie needs. If you do enter body fat %, it switches to Katch-McArdle, which is generally more accurate since it's based on your actual lean body mass rather than a population average."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the Katch-McArdle formula, and why does body fat % matter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Katch-McArdle calculates BMR from your lean body mass instead of age and gender averages, so it accounts for differences in muscle mass between two people of the same height, weight, age, and gender."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is \"ideal body weight\" and how is it calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's an estimated healthy weight range based on your height, calculated using four classic medical formulas (Hamwi, Devine, Robinson, and Miller). They're population averages, not individual targets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I send my calculated calories straight to a food tracker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 the \"Use as my calorie & protein goal\" button sends your chosen target directly to the Calorie Tracker's daily goal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this calculator remember my details for next time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 your age, height, weight, gender, and activity level are saved privately in your browser, so they're pre-filled the next time you visit. Nothing is sent to a server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I recalculate my TDEE as my weight changes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes \u2014 TDEE shifts as your weight changes, since it's partly based on body weight. It's worth recalculating every few weeks, especially during active weight loss or gain, to keep your targets accurate."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="root">
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="https://healthylifescale.com" class="site-logo">
+        <svg class="logo-icon" width="24" height="24" viewBox="0 0 100 100" role="img" aria-hidden="true">
+          <rect x="2" y="2" width="96" height="96" rx="18" fill="var(--protein)"/>
+          <polyline points="16,50 30,50 38,28 50,74 61,36 70,50 84,50" fill="none" stroke="var(--paper)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Healthy Life Scale
+      </a>
+      <span class="current-page">BMR / TDEE</span>
+      <div class="tools-dropdown">
+        <button class="tools-btn" id="toolsBtn" aria-haspopup="true" aria-expanded="false">
+          Other Tools
+          <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 3L5 7L9 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="tools-menu" id="toolsMenu">
+          <div class="tools-menu-label">Other tools</div>
+        <a href="https://healthylifescale.com">
+          <div class="tm-name">Calorie Tracker</div>
+          <div class="tm-desc">Search 240+ foods and track daily calories, protein, carbs, fat, fiber, sugar & sodium.</div>
+        </a>
+        <a href="https://bmi.healthylifescale.com">
+          <div class="tm-name">BMI Calculator</div>
+          <div class="tm-desc">Check your Body Mass Index and healthy weight range.</div>
+        </a>
+        <a href="https://bodyfat.healthylifescale.com">
+          <div class="tm-name">Body Fat % Calculator</div>
+          <div class="tm-desc">Estimate body fat using the Navy tape-measure method.</div>
+        </a>
+        <a href="https://waisttohip.healthylifescale.com">
+          <div class="tm-name">Waist-to-Hip Ratio</div>
+          <div class="tm-desc">Check your ratio against WHO risk categories.</div>
+        </a>
+        <a href="https://framesize.healthylifescale.com">
+          <div class="tm-name">Body Frame Size Calculator</div>
+          <div class="tm-desc">Find your small, medium, or large frame size.</div>
+        </a>
+        <a href="https://bri.healthylifescale.com">
+          <div class="tm-name">Body Roundness Index</div>
+          <div class="tm-desc">A newer alternative to BMI using waist, height, and hip.</div>
+        </a>
+        <a href="https://water.healthylifescale.com">
+          <div class="tm-name">Water Intake</div>
+          <div class="tm-desc">Get a daily hydration goal and log glasses as you drink.</div>
+        </a>
+        <a href="https://protein.healthylifescale.com">
+          <div class="tm-name">Protein Intake Calculator</div>
+          <div class="tm-desc">Find your daily protein target based on body weight and goal.</div>
+        </a>
+        <a href="https://caloriesburned.healthylifescale.com">
+          <div class="tm-name">Calories Burned Calculator</div>
+          <div class="tm-desc">See how many calories you burned during any activity.</div>
+        </a>
+        <a href="https://sleep.healthylifescale.com">
+          <div class="tm-name">Sleep Calculator</div>
+          <div class="tm-desc">Find your ideal bedtime or wake-up time by sleep cycle.</div>
+        </a>
+        <a href="https://nap.healthylifescale.com">
+          <div class="tm-name">Nap Calculator</div>
+          <div class="tm-desc">Find your ideal nap length and wake-up time.</div>
+        </a>
+        <a href="https://duedate.healthylifescale.com">
+          <div class="tm-name">Pregnancy Due Date</div>
+          <div class="tm-desc">Estimate your due date and track gestational age week by week.</div>
+        </a>
+        <a href="https://pregnancyweight.healthylifescale.com">
+          <div class="tm-name">Pregnancy Weight Gain</div>
+          <div class="tm-desc">See your recommended pregnancy weight gain range.</div>
+        </a>
+        <a href="https://period.healthylifescale.com">
+          <div class="tm-name">Period Tracker</div>
+          <div class="tm-desc">Estimate your next period, ovulation day, and fertile window.</div>
+        </a>
+        <a href="https://height.healthylifescale.com">
+          <div class="tm-name">Height Predictor</div>
+          <div class="tm-desc">Estimate a child's adult height from parents' heights.</div>
+        </a>
+        <a href="https://bloodpressure.healthylifescale.com">
+          <div class="tm-name">Blood Pressure Calculator</div>
+          <div class="tm-desc">Check your reading against AHA blood pressure categories.</div>
+        </a>
+        <a href="https://heartage.healthylifescale.com">
+          <div class="tm-name">Heart Age Calculator</div>
+          <div class="tm-desc">See how lifestyle factors compare your heart age to your real age.</div>
+        </a>
+        <a href="https://ascvd.healthylifescale.com">
+          <div class="tm-name">ASCVD Risk Calculator</div>
+          <div class="tm-desc">Estimate your 10-year heart disease and stroke risk tier.</div>
+        </a>
+        <a href="https://heartratezone.healthylifescale.com">
+          <div class="tm-name">Target Heart Rate Zone</div>
+          <div class="tm-desc">Find your personalized training zones using the Karvonen formula.</div>
+        </a>
+        <a href="https://heartraterecovery.healthylifescale.com">
+          <div class="tm-name">Heart Rate Recovery</div>
+          <div class="tm-desc">Measure your post-exercise cardiovascular fitness.</div>
+        </a>
+        <a href="https://breathholding.healthylifescale.com">
+          <div class="tm-name">Breath Holding Test</div>
+          <div class="tm-desc">Time how long you can hold your breath and see how it compares.</div>
+        </a>
+        <a href="https://pace.healthylifescale.com">
+          <div class="tm-name">Running Pace Calculator</div>
+          <div class="tm-desc">Calculate your pace, speed, and predicted race times.</div>
+        </a>
+        <a href="https://symptoms.healthylifescale.com">
+          <div class="tm-name">Symptom Checker</div>
+          <div class="tm-desc">Get an urgency level based on your symptoms, age, and history.</div>
+        </a>
+        <a href="https://mentalhealth.healthylifescale.com">
+          <div class="tm-name">Mental Health Survey</div>
+          <div class="tm-desc">A private PHQ-9 / GAD-7 depression & anxiety screening.</div>
+        </a>
+        <a href="https://fertility.healthylifescale.com">
+          <div class="tm-name">Fertility Checklist</div>
+          <div class="tm-desc">Check lifestyle factors linked to sperm health and track over time.</div>
+        </a>
+        <a href="https://gripstrength.healthylifescale.com">
+          <div class="tm-name">Grip Strength Calculator</div>
+          <div class="tm-desc">Benchmark your handgrip strength by age and sex.</div>
+        </a>
+        <a href="https://onerepmax.healthylifescale.com">
+          <div class="tm-name">One-Rep Max Calculator</div>
+          <div class="tm-desc">Estimate your 1RM using the Epley and Brzycki formulas.</div>
+        </a>
+        <a href="https://pushuptest.healthylifescale.com">
+          <div class="tm-name">Push-Up / Sit-Up Test</div>
+          <div class="tm-desc">Benchmark your push-up or sit-up count by age and sex.</div>
+        </a>
+        <a href="https://bac.healthylifescale.com">
+          <div class="tm-name">BAC Calculator</div>
+          <div class="tm-desc">Educational blood alcohol content estimate.</div>
+        </a>
+        <a href="https://a1c.healthylifescale.com">
+          <div class="tm-name">A1C Converter</div>
+          <div class="tm-desc">Convert between A1C and average blood sugar.</div>
+        </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<script>
+(function(){
+  var btn = document.getElementById('toolsBtn');
+  var menu = document.getElementById('toolsMenu');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    var isOpen = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.addEventListener('click', function(e){
+    if(!menu.classList.contains('open')) return;
+    if(!menu.contains(e.target) && !btn.contains(e.target)){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && menu.classList.contains('open')){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
+  });
+})();
+</script>
+
+
+  <div class="brand">
+    <h1>TDEE &amp; Macro Calculator</h1>
+    <div class="sub">daily calorie needs &middot; maintenance, loss &amp; gain targets &middot; macro breakdown</div>
+  </div>
+
+  <div class="card">
+    <h3>Your details</h3>
+    <div class="unit-toggle">
+      <button id="unitMetric" class="active">Metric (kg/cm)</button>
+      <button id="unitImperial">Imperial (lb/in)</button>
+    </div>
+    <div class="gender-toggle">
+      <button id="genderMale" class="active">Male</button>
+      <button id="genderFemale">Female</button>
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="age">Age</label><input type="number" id="age" placeholder="e.g. 28"></div>
+      <div class="field">
+        <label for="activity">Activity level</label>
+        <select id="activity">
+          <option value="1.2">Sedentary (desk job, no exercise)</option>
+          <option value="1.375">Light (exercise 1&ndash;3 days/wk)</option>
+          <option value="1.55" selected>Moderate (exercise 3&ndash;5 days/wk)</option>
+          <option value="1.725">Active (exercise 6&ndash;7 days/wk)</option>
+          <option value="1.9">Very active (physical job / athlete)</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="metricFields">
+      <div class="field-row">
+        <div class="field"><label for="heightCm">Height (cm)</label><input type="number" id="heightCm" placeholder="e.g. 170"></div>
+        <div class="field"><label for="weightKg">Weight (kg)</label><input type="number" id="weightKg" placeholder="e.g. 65"></div>
+      </div>
+    </div>
+    <div id="imperialFields" style="display:none;">
+      <div class="field-row">
+        <div class="field"><label for="heightFt">Height (ft)</label><input type="number" id="heightFt" placeholder="e.g. 5"></div>
+        <div class="field"><label for="heightIn">Height (in)</label><input type="number" id="heightIn" placeholder="e.g. 7"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="weightLb">Weight (lb)</label><input type="number" id="weightLb" placeholder="e.g. 143"></div>
+        <div></div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field"><label for="bodyfat">Body fat % (optional)</label><input type="number" id="bodyfat" placeholder="e.g. 20" min="3" max="60" step="0.1"></div>
+      <div></div>
+    </div>
+    <div class="field-optional-note">If you know your body fat %, we'll use the Katch-McArdle formula instead of Mifflin-St Jeor &mdash; it's more accurate because it's based on your lean body mass rather than a population average.</div>
+
+    <button class="calc-btn" id="calcBtn">Calculate</button>
+  </div>
+
+  <div class="bmr-line" id="bmrLine" aria-live="polite" role="status"></div>
+  <div class="formula-badge" id="formulaBadge"></div>
+
+  <div class="quickstats" id="quickstats">
+    <div class="quickstat-card">
+      <div class="qs-label">BMI</div>
+      <div class="qs-value" id="bmiValue">&mdash;</div>
+      <div class="qs-sub" id="bmiCategory">&mdash;</div>
+    </div>
+    <div class="quickstat-card">
+      <div class="qs-label">Ideal weight range</div>
+      <div class="qs-value" id="idealWeightQuick">&mdash;</div>
+      <div class="qs-sub">avg. of 4 formulas</div>
+    </div>
+  </div>
+
+  <div class="targets-grid" id="targetsGrid">
+    <div class="target-card maintain">
+      <div class="tc-label">Maintenance</div>
+      <div class="tc-cal" id="maintainCal">0</div>
+      <div class="tc-sub">no change</div>
+      <button class="tc-select" data-target="maintain">Select</button>
+    </div>
+    <div class="target-card loss">
+      <div class="tc-label">Weight Loss</div>
+      <div class="tc-cal" id="lossCal">0</div>
+      <div class="tc-sub">&minus;500 cal &middot; ~0.5 kg/wk</div>
+      <button class="tc-select" data-target="loss">Select</button>
+    </div>
+    <div class="target-card gain">
+      <div class="tc-label">Weight Gain</div>
+      <div class="tc-cal" id="gainCal">0</div>
+      <div class="tc-sub">+500 cal &middot; ~0.5 kg/wk</div>
+      <button class="tc-select" data-target="gain">Select</button>
+    </div>
+  </div>
+
+  <div class="card" id="activityCard" style="display:none;">
+    <h3>Calories by activity level</h3>
+    <p style="font-size:12.5px; color:var(--ink-soft); margin:0 0 10px;">Your BMR stays the same &mdash; only the multiplier changes. Here's how your maintenance calories would shift at each activity level, so you can double-check you picked the right one.</p>
+    <table class="activity-table">
+      <thead><tr><th>Level</th><th></th><th class="cal-col">Cal/day</th></tr></thead>
+      <tbody id="activityTableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="card" id="idealWeightCard" style="display:none;">
+    <h3>Ideal body weight</h3>
+    <div class="idealweight-range" id="idealWeightRange">&mdash;</div>
+    <p style="font-size:12px; color:var(--muted); text-align:center; margin:0 0 14px;">Estimated range across 4 classic formulas &mdash; these predate BMI and are population averages, not individual targets, especially if you carry significant muscle.</p>
+    <table class="idealweight-table" id="idealWeightTable"></table>
+  </div>
+
+  <div class="card macro-card" id="macroCard">
+    <h3>Macro Calculator</h3>
+    <div class="macro-basis" id="macroBasis">Based on <b>&mdash;</b> calories/day</div>
+
+    <div class="style-toggle">
+      <button class="styleBtn active" data-style="balanced">Balanced</button>
+      <button class="styleBtn" data-style="highprotein">High Protein</button>
+      <button class="styleBtn" data-style="lowcarb">Low Carb</button>
+    </div>
+
+    <div class="macro-row">
+      <div class="macro-swatch" style="background:var(--protein);"></div>
+      <div class="mr-name">Protein</div>
+      <div class="mr-pct" id="proteinPct">30%</div>
+      <div class="mr-grams" id="proteinGrams">0g</div>
+    </div>
+    <div class="macro-row">
+      <div class="macro-swatch" style="background:var(--carb);"></div>
+      <div class="mr-name">Carbohydrates</div>
+      <div class="mr-pct" id="carbPct">40%</div>
+      <div class="mr-grams" id="carbGrams">0g</div>
+    </div>
+    <div class="macro-row">
+      <div class="macro-swatch" style="background:var(--fat);"></div>
+      <div class="mr-name">Fat</div>
+      <div class="mr-pct" id="fatPct">30%</div>
+      <div class="mr-grams" id="fatGrams">0g</div>
+    </div>
+
+    <button class="use-goal-btn" id="useGoalBtn">Use as my calorie &amp; protein goal</button>
+  </div>
+
+  <div class="card">
+    <h3>How it works</h3>
+    <ol class="howworks-list">
+      <li><b>We calculate your BMR.</b> If you enter your body fat %, we use the Katch-McArdle formula (based on your lean body mass) &mdash; the more accurate option when body composition is known. Otherwise we use Mifflin-St Jeor (age, gender, height, weight), the most validated formula for the general population.</li>
+      <li><b>We factor in your activity level.</b> BMR &times; an activity multiplier gives your TDEE (Total Daily Energy Expenditure) &mdash; your maintenance calories. The activity comparison table shows how each level would change your number, so you can sanity-check your pick.</li>
+      <li><b>Three targets appear.</b> Maintenance (your TDEE), Weight Loss (&minus;500 cal/day, roughly 0.5 kg/week), and Weight Gain (+500 cal/day).</li>
+      <li><b>You also get BMI and ideal weight range.</b> Calculated from the same height/weight, using four classic ideal-body-weight formulas (Hamwi, Devine, Robinson, Miller) averaged together.</li>
+      <li><b>Pick a macro style.</b> Choose which target to build macros around, then a split (Balanced, High Protein, or Low Carb) to see exact grams of protein, carbs, and fat.</li>
+      <li><b>Push it to your tracker.</b> "Use as my goal" sends your chosen calories and protein straight to the Calorie Tracker's daily goal.</li>
+    </ol>
+    <p class="howworks-note">These are population-level formulas, not individualized prescriptions &mdash; actual metabolism varies by individual, even with body fat % factored in.</p>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title" style="font-family:'Archivo Black',sans-serif; font-size:17px; text-transform:uppercase; letter-spacing:-0.01em; margin:0 0 14px;">Frequently asked questions</h2>
+    <div id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">What's the difference between BMR and TDEE?<span class="faq-icon">+</span></button>
+        <div class="faq-a">BMR (Basal Metabolic Rate) is the calories your body burns at complete rest. TDEE (Total Daily Energy Expenditure) adds your activity level on top of that — TDEE is your actual maintenance calorie number.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How many calories should I eat to lose weight?<span class="faq-icon">+</span></button>
+        <div class="faq-a">A common approach is eating around 500 calories below your TDEE per day, which typically leads to about 0.5kg (1lb) of weight loss per week — shown as the "Weight Loss" target above.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How accurate is this TDEE calculator?<span class="faq-icon">+</span></button>
+        <div class="faq-a">If you don't enter body fat %, it uses Mifflin-St Jeor, one of the most widely validated formulas for estimating calorie needs. If you do enter body fat %, it switches to Katch-McArdle, which is generally more accurate since it's based on your actual lean body mass rather than a population average. Either way, individual metabolism can still vary by 10–15% from the estimate.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What's the Katch-McArdle formula, and why does body fat % matter?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Katch-McArdle calculates BMR from your lean body mass (total weight minus fat mass) instead of age and gender averages. Two people with the same height, weight, age, and gender can have very different metabolisms if one carries more muscle — Katch-McArdle accounts for that difference, which is why it's considered more accurate when you know your body fat percentage.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What is "ideal body weight" and how is it calculated?<span class="faq-icon">+</span></button>
+        <div class="faq-a">It's an estimated healthy weight range based on your height, calculated using four classic medical formulas (Hamwi, Devine, Robinson, and Miller) that predate BMI. They're population averages from decades-old studies, not individual targets — someone with more muscle mass than average will reasonably weigh more than these ranges suggest.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What macro split is best for cutting or weight loss?<span class="faq-icon">+</span></button>
+        <div class="faq-a">A higher-protein split (like the "High Protein" option here) is often recommended during a calorie deficit, since it helps preserve muscle mass while losing fat.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I send my calculated calories straight to a food tracker?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — the "Use as my calorie & protein goal" button sends your chosen target directly to the Calorie Tracker's daily goal.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does this calculator remember my details for next time?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — your age, height, weight, gender, and activity level are saved privately in your browser, so they're pre-filled the next time you visit. Nothing is sent to a server.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Should I recalculate my TDEE as my weight changes?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — TDEE shifts as your weight changes, since it's partly based on body weight. It's worth recalculating every few weeks, especially during active weight loss or gain, to keep your targets accurate.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Explore other tools</h3>
+    <div class="explore-grid">
+      <a href="https://healthylifescale.com" class="explore-card">
+        <div class="ec-name">Calorie Tracker</div>
+        <div class="ec-desc">Search 240+ foods and track daily calories, protein, carbs, fat, fiber, sugar & sodium.</div>
+        <div class="ec-arrow">Open &rarr;</div>
+      </a>
+      <a href="https://protein.healthylifescale.com" class="explore-card">
+        <div class="ec-name">Protein Intake Calculator</div>
+        <div class="ec-desc">Find your daily protein target based on body weight and goal.</div>
+        <div class="ec-arrow">Open &rarr;</div>
+      </a>
+      <a href="https://bodyfat.healthylifescale.com" class="explore-card">
+        <div class="ec-name">Body Fat % Calculator</div>
+        <div class="ec-desc">Estimate body fat using the Navy tape-measure method.</div>
+        <div class="ec-arrow">Open &rarr;</div>
+      </a>
+      <a href="https://a1c.healthylifescale.com" class="explore-card">
+        <div class="ec-name">A1C Converter</div>
+        <div class="ec-desc">Convert between A1C and average blood sugar.</div>
+        <div class="ec-arrow">Open &rarr;</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    Estimates use the Mifflin-St Jeor equation for BMR (or Katch-McArdle if body fat % is provided) and standard 500-calorie deficit/surplus conventions for loss/gain (roughly 0.5 kg or ~1 lb per week). Ideal body weight uses four population-average formulas (Hamwi, Devine, Robinson, Miller). Macro splits are general presets, not personalized prescriptions. Not medical advice &mdash; consult a professional for individualized guidance, especially with significant calorie deficits.
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-about">
+      <h3>About Healthy Life Scale</h3>
+      <p>Healthy Life Scale is a collection of free health and wellness calculators &mdash; a calorie and macro tracker, BMI calculator, water intake calculator, TDEE calculator, sleep calculator, pregnancy due date and weight gain calculators, period and ovulation tracker, child height predictor, blood pressure calculator, heart age calculator, and breath holding test. Every tool is free to use, works without an account or app download, and saves your data privately on your own device rather than a server. Built for anyone who wants quick, practical health calculators without ads, logins, or paywalls.</p>
+    </div>
+    <div class="footer-links-title">All tools</div>
+    <div class="footer-links">
+      <a href="https://healthylifescale.com">Calorie Tracker</a>
+      <a href="https://bmi.healthylifescale.com">BMI Calculator</a>
+      <a href="https://bodyfat.healthylifescale.com">Body Fat % Calculator</a>
+      <a href="https://waisttohip.healthylifescale.com">Waist-to-Hip Ratio Calculator</a>
+      <a href="https://framesize.healthylifescale.com">Body Frame Size Calculator</a>
+      <a href="https://bri.healthylifescale.com">Body Roundness Index Calculator</a>
+      <a href="https://water.healthylifescale.com">Water Intake Calculator</a>
+      <a href="https://bmr.healthylifescale.com" style="font-weight:700;color:var(--ink);">TDEE & Macro Calculator</a>
+      <a href="https://protein.healthylifescale.com">Protein Intake Calculator</a>
+      <a href="https://caloriesburned.healthylifescale.com">Calories Burned Calculator</a>
+      <a href="https://sleep.healthylifescale.com">Sleep Calculator</a>
+      <a href="https://nap.healthylifescale.com">Nap Calculator</a>
+      <a href="https://duedate.healthylifescale.com">Pregnancy Due Date Calculator</a>
+      <a href="https://pregnancyweight.healthylifescale.com">Pregnancy Weight Gain Calculator</a>
+      <a href="https://period.healthylifescale.com">Period & Ovulation Tracker</a>
+      <a href="https://height.healthylifescale.com">Child Height Predictor</a>
+      <a href="https://bloodpressure.healthylifescale.com">Blood Pressure Calculator</a>
+      <a href="https://heartage.healthylifescale.com">Heart Age Calculator</a>
+      <a href="https://ascvd.healthylifescale.com">ASCVD Risk Calculator</a>
+      <a href="https://heartratezone.healthylifescale.com">Target Heart Rate Zone</a>
+      <a href="https://heartraterecovery.healthylifescale.com">Heart Rate Recovery Calculator</a>
+      <a href="https://breathholding.healthylifescale.com">Breath Holding Test</a>
+      <a href="https://pace.healthylifescale.com">Running Pace Calculator</a>
+      <a href="https://symptoms.healthylifescale.com">Symptom Checker</a>
+      <a href="https://mentalhealth.healthylifescale.com">Mental Health Survey</a>
+      <a href="https://fertility.healthylifescale.com">Fertility Checklist</a>
+      <a href="https://gripstrength.healthylifescale.com">Grip Strength Calculator</a>
+      <a href="https://onerepmax.healthylifescale.com">One-Rep Max Calculator</a>
+      <a href="https://pushuptest.healthylifescale.com">Push-Up / Sit-Up Test Benchmark</a>
+      <a href="https://bac.healthylifescale.com">BAC Calculator</a>
+      <a href="https://a1c.healthylifescale.com">A1C / Blood Sugar Converter</a>
+    </div>
+        <div class="footer-legal">
+      <a href="https://healthylifescale.com/privacy-policy.html">Privacy Policy</a><span class="fl-dot">&middot;</span><a href="https://healthylifescale.com/about.html">About</a>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2026 Healthy Life Scale. All tools are educational and provide general estimates only &mdash; they are not medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider for medical concerns.
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.querySelector('.faq-icon').textContent = isOpen ? '\u2212' : '+';
+    });
+  });
+
+  const hasClaudeStorage = typeof window.storage !== 'undefined' && window.storage;
+  let localStorageOK = true;
+  try{ localStorage.setItem('__test__','1'); localStorage.removeItem('__test__'); }catch(e){ localStorageOK = false; }
+  const store = {
+    async get(key){
+      if(hasClaudeStorage){ try{ const r = await window.storage.get(key, false); return r ? r.value : null; }catch(e){ return null; } }
+      if(!localStorageOK) return null;
+      try{ return localStorage.getItem(key); }catch(e){ return null; }
+    },
+    async set(key, value){
+      if(hasClaudeStorage){ try{ await window.storage.set(key, value, false); return true; }catch(e){ return false; } }
+      if(!localStorageOK) return false;
+      try{ localStorage.setItem(key, value); return true; }catch(e){ return false; }
+    }
+  };
+
+  let gender = 'male';
+  $('genderMale').addEventListener('click', ()=>{ gender='male'; $('genderMale').classList.add('active'); $('genderFemale').classList.remove('active'); });
+  $('genderFemale').addEventListener('click', ()=>{ gender='female'; $('genderFemale').classList.add('active'); $('genderMale').classList.remove('active'); });
+
+  let units = 'metric';
+  $('unitMetric').addEventListener('click', ()=>{
+    units = 'metric';
+    $('unitMetric').classList.add('active'); $('unitImperial').classList.remove('active');
+    $('metricFields').style.display = 'block'; $('imperialFields').style.display = 'none';
+  });
+  $('unitImperial').addEventListener('click', ()=>{
+    units = 'imperial';
+    $('unitImperial').classList.add('active'); $('unitMetric').classList.remove('active');
+    $('imperialFields').style.display = 'block'; $('metricFields').style.display = 'none';
+  });
+
+  async function saveLastInputs(){
+    const data = {
+      age: $('age').value, activity: $('activity').value, gender: gender, units: units, bodyfat: $('bodyfat').value,
+      heightCm: $('heightCm').value, weightKg: $('weightKg').value,
+      heightFt: $('heightFt').value, heightIn: $('heightIn').value, weightLb: $('weightLb').value
+    };
+    await store.set('tdee_last_inputs', JSON.stringify(data));
+  }
+  async function restoreLastInputs(){
+    try{
+      const v = await store.get('tdee_last_inputs');
+      if(!v) return;
+      const data = JSON.parse(v);
+      if(data.age) $('age').value = data.age;
+      if(data.activity) $('activity').value = data.activity;
+      if(data.bodyfat) $('bodyfat').value = data.bodyfat;
+      if(data.heightCm) $('heightCm').value = data.heightCm;
+      if(data.weightKg) $('weightKg').value = data.weightKg;
+      if(data.heightFt) $('heightFt').value = data.heightFt;
+      if(data.heightIn) $('heightIn').value = data.heightIn;
+      if(data.weightLb) $('weightLb').value = data.weightLb;
+      if(data.gender === 'female'){ gender = 'female'; $('genderFemale').classList.add('active'); $('genderMale').classList.remove('active'); }
+      if(data.units === 'imperial'){ $('unitImperial').click(); }
+    }catch(e){}
+  }
+  restoreLastInputs();
+
+  const MACRO_STYLES = {
+    balanced:    { protein: 30, carb: 40, fat: 30 },
+    highprotein: { protein: 40, carb: 30, fat: 30 },
+    lowcarb:     { protein: 35, carb: 20, fat: 45 }
+  };
+
+  let calorieTargets = { maintain: 0, loss: 0, gain: 0 };
+  let selectedTarget = 'maintain';
+  let selectedStyle = 'balanced';
+
+  document.querySelectorAll('.styleBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.styleBtn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedStyle = btn.getAttribute('data-style');
+      renderMacros();
+    });
+  });
+
+  document.querySelectorAll('.tc-select').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tc-select').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedTarget = btn.getAttribute('data-target');
+      renderMacros();
+    });
+  });
+
+  function renderMacros(){
+    const cal = calorieTargets[selectedTarget];
+    const labelMap = { maintain: 'Maintenance', loss: 'Weight Loss', gain: 'Weight Gain' };
+    $('macroBasis').innerHTML = 'Based on <b>' + Math.round(cal) + '</b> calories/day (' + labelMap[selectedTarget] + ')';
+
+    const style = MACRO_STYLES[selectedStyle];
+    const proteinCal = cal * (style.protein/100);
+    const carbCal = cal * (style.carb/100);
+    const fatCal = cal * (style.fat/100);
+
+    const proteinG = Math.round(proteinCal / 4);
+    const carbG = Math.round(carbCal / 4);
+    const fatG = Math.round(fatCal / 9);
+
+    $('proteinPct').textContent = style.protein + '%';
+    $('carbPct').textContent = style.carb + '%';
+    $('fatPct').textContent = style.fat + '%';
+    $('proteinGrams').textContent = proteinG + 'g';
+    $('carbGrams').textContent = carbG + 'g';
+    $('fatGrams').textContent = fatG + 'g';
+
+    $('macroCard').classList.add('show');
+    $('useGoalBtn').classList.remove('done');
+    $('useGoalBtn').textContent = 'Use as my calorie & protein goal';
+
+    $('useGoalBtn').onclick = async ()=>{
+      let settings = { calorieGoal: null, proteinGoal: null };
+      try{ const v = await store.get('settings'); if(v) settings = JSON.parse(v); }catch(e){}
+      settings.calorieGoal = Math.round(cal);
+      settings.proteinGoal = proteinG;
+      await store.set('settings', JSON.stringify(settings));
+      $('useGoalBtn').classList.add('done');
+      $('useGoalBtn').textContent = 'Goal set \u2713';
+    };
+  }
+
+  $('calcBtn').addEventListener('click', async ()=>{
+    const age = parseFloat($('age').value);
+    const activity = parseFloat($('activity').value);
+    const bodyfat = parseFloat($('bodyfat').value);
+
+    let h, w;
+    if(units === 'metric'){
+      h = parseFloat($('heightCm').value);
+      w = parseFloat($('weightKg').value);
+    } else {
+      const ft = parseFloat($('heightFt').value) || 0;
+      const inch = parseFloat($('heightIn').value) || 0;
+      const lb = parseFloat($('weightLb').value);
+      h = (ft * 12 + inch) * 2.54;
+      w = lb ? lb / 2.20462 : NaN;
+    }
+
+    if(!age || !h || !w || age <= 0 || h <= 0 || w <= 0){ alert('Please fill in age, height, and weight.'); return; }
+    if(age < 15 || age > 120){ alert('Please enter an age between 15 and 120.'); return; }
+    if(h < 50 || h > 272){ alert('Please enter a height between 50 and 272 cm.'); return; }
+    if(w < 2 || w > 650){ alert('Please enter a weight between 2 and 650 kg.'); return; }
+
+    await saveLastInputs();
+
+    // --- BMR: Katch-McArdle (if body fat % given) is more accurate since it's based on
+    // lean body mass rather than a population-average formula. Otherwise, Mifflin-St Jeor,
+    // the most validated equation when body composition isn't known.
+    let bmr, formulaUsed, leanMass = null;
+    const hasValidBodyfat = bodyfat && bodyfat >= 3 && bodyfat <= 60;
+    if(hasValidBodyfat){
+      leanMass = w * (1 - bodyfat/100);
+      bmr = 370 + (21.6 * leanMass);
+      formulaUsed = 'katch';
+    } else {
+      if(gender === 'male'){ bmr = 10*w + 6.25*h - 5*age + 5; }
+      else { bmr = 10*w + 6.25*h - 5*age - 161; }
+      formulaUsed = 'mifflin';
+    }
+    const tdee = bmr * activity;
+
+    calorieTargets = {
+      maintain: Math.round(tdee),
+      loss: Math.round(tdee - 500),
+      gain: Math.round(tdee + 500)
+    };
+
+    $('bmrLine').innerHTML = 'Your BMR (calories at rest): <b>' + Math.round(bmr) + ' cal/day</b>';
+    $('bmrLine').classList.add('show');
+    if($('bmrLine').scrollIntoView){ $('bmrLine').scrollIntoView({behavior:'smooth', block:'start'}); }
+
+    if(formulaUsed === 'katch'){
+      $('formulaBadge').innerHTML = 'Using the <b>Katch-McArdle</b> formula \u2014 based on your ' + Math.round(leanMass) + 'kg lean body mass (more accurate than a population-average formula)';
+    } else {
+      $('formulaBadge').innerHTML = 'Using the <b>Mifflin-St Jeor</b> formula \u2014 add your body fat % above for an even more precise estimate';
+    }
+    $('formulaBadge').classList.add('show');
+
+    $('maintainCal').textContent = calorieTargets.maintain;
+    $('lossCal').textContent = calorieTargets.loss;
+    $('gainCal').textContent = calorieTargets.gain;
+    $('targetsGrid').classList.add('show');
+
+    document.querySelectorAll('.tc-select').forEach(b=>b.classList.remove('selected'));
+    document.querySelector('.tc-select[data-target="maintain"]').classList.add('selected');
+    selectedTarget = 'maintain';
+
+    // --- BMI ---
+    const heightM = h / 100;
+    const bmi = w / (heightM * heightM);
+    $('bmiValue').textContent = bmi.toFixed(1);
+    let bmiCat = 'Normal weight';
+    if(bmi < 18.5) bmiCat = 'Underweight';
+    else if(bmi < 25) bmiCat = 'Normal weight';
+    else if(bmi < 30) bmiCat = 'Overweight';
+    else bmiCat = 'Obese';
+    $('bmiCategory').textContent = bmiCat;
+
+    // --- Ideal body weight: 4 classic formulas, all originally in kg + inches over 5ft ---
+    const totalInches = h / 2.54;
+    const inchesOver5ft = totalInches - 60;
+    const IBW_FORMULAS = gender === 'male'
+      ? [
+          { name: 'G.J. Hamwi', year: '1964', base: 48.0, perInch: 2.7 },
+          { name: 'B.J. Devine', year: '1974', base: 50.0, perInch: 2.3 },
+          { name: 'J.D. Robinson', year: '1983', base: 52.0, perInch: 1.9 },
+          { name: 'D.R. Miller', year: '1983', base: 56.2, perInch: 1.41 }
+        ]
+      : [
+          { name: 'G.J. Hamwi', year: '1964', base: 45.5, perInch: 2.2 },
+          { name: 'B.J. Devine', year: '1974', base: 45.5, perInch: 2.3 },
+          { name: 'J.D. Robinson', year: '1983', base: 49.0, perInch: 1.7 },
+          { name: 'D.R. Miller', year: '1983', base: 53.1, perInch: 1.36 }
+        ];
+    const ibwResults = IBW_FORMULAS.map(f => Math.max(30, f.base + f.perInch * inchesOver5ft));
+    const ibwMin = Math.min(...ibwResults);
+    const ibwMax = Math.max(...ibwResults);
+    const unitLabel = units === 'metric' ? 'kg' : 'lb';
+    const toDisplayUnit = kg => units === 'metric' ? kg : kg * 2.20462;
+    $('idealWeightRange').textContent = Math.round(toDisplayUnit(ibwMin)) + '\u2013' + Math.round(toDisplayUnit(ibwMax)) + ' ' + unitLabel;
+    $('idealWeightQuick').textContent = Math.round(toDisplayUnit(ibwMin)) + '\u2013' + Math.round(toDisplayUnit(ibwMax));
+    $('idealWeightTable').innerHTML = IBW_FORMULAS.map((f,i) => `
+      <tr><td>${f.name} <span class="iw-year">(${f.year})</span></td><td class="iw-val">${Math.round(toDisplayUnit(ibwResults[i]))} ${unitLabel}</td></tr>
+    `).join('');
+    $('idealWeightCard').style.display = 'block';
+    $('quickstats').classList.add('show');
+
+    // --- Activity level comparison table ---
+    const ACTIVITY_LEVELS = [
+      { mult: 1.2, label: 'Sedentary', desc: 'Desk job, no exercise' },
+      { mult: 1.375, label: 'Light', desc: 'Exercise 1\u20133 days/wk' },
+      { mult: 1.55, label: 'Moderate', desc: 'Exercise 3\u20135 days/wk' },
+      { mult: 1.725, label: 'Active', desc: 'Exercise 6\u20137 days/wk' },
+      { mult: 1.9, label: 'Very active', desc: 'Physical job / athlete' }
+    ];
+    $('activityTableBody').innerHTML = ACTIVITY_LEVELS.map(lvl => {
+      const isSelected = Math.abs(lvl.mult - activity) < 0.001;
+      return `<tr class="${isSelected ? 'selected-row' : ''}"><td>${lvl.label}${isSelected ? ' \u2713' : ''}</td><td style="color:var(--muted); font-size:11.5px;">${lvl.desc}</td><td class="cal-col">${Math.round(bmr * lvl.mult)}</td></tr>`;
+    }).join('');
+    $('activityCard').style.display = 'block';
+
+    renderMacros();
+  });
+})();
+</script>
+</body>
+</html>
